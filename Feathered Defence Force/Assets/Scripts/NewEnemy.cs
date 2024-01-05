@@ -26,6 +26,10 @@ public class NewEnemy : CommonInheritor
     public bool reversed;
     public List<Status> statuses;
 
+    public Color hurt;
+    public Color Normal;
+    private TimerScript pColorTimer;
+    public float colorHurtTime;
 
     private void Start()
     {
@@ -40,12 +44,17 @@ public class NewEnemy : CommonInheritor
         transform.position = waypoints[0].position;
         gameObject.tag = "Enemy";
 
+        pColorTimer = new TimerScript(colorHurtTime);
+
 
     }
 
     private void Update()
     {
         lerpScript.Update();
+        pColorTimer.Update();
+
+        sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, Normal, Manager.manager.linearCurve.Evaluate(pColorTimer.Progress()));
 
         if (currentWaypoint >= waypoints.Count)
         {
@@ -54,15 +63,15 @@ public class NewEnemy : CommonInheritor
         }
         else
         {
-            if (active && transform.position == waypoints[currentWaypoint]!.position)
-            {
-                currentWaypoint++;
-            }
+
 
             if (active && waypoints.Count > 0)
             {
-                Debug.Log(currentWaypoint);
                 transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
+            }
+            if (active && transform.position == waypoints[currentWaypoint]!.position)
+            {
+                currentWaypoint++;
             }
         }
 
@@ -74,14 +83,19 @@ public class NewEnemy : CommonInheritor
 
     public void Damage(float mAmount, Status mNewStatus = null)
     {
-        //make a little bounce effect
         //play a sound
+        
         //enable/update healthbar
 
-        enemyinfo.hp -= mAmount;
-        if (enemyinfo.hp <= 0)
+        health -= mAmount;
+        if (health <= 0)
         {
-
+            Kill();
+        }
+        else
+        {
+            Manager.PlayAudio(14, 0.5f);
+            pColorTimer.Start(colorHurtTime);
         }
 
         if(mNewStatus != null)
@@ -93,11 +107,17 @@ public class NewEnemy : CommonInheritor
 
     public void Kill()
     {
+        Manager.PlayParticle(0, transform.position);
         if (enemyinfo.boss)
         {
-            Manager.PlayAudio(0);
+            Manager.PlayAudio(7, 1);
+        }
+        else
+        {
+            Manager.PlayAudio(11, 0.7f);
         }
 
         //drop monye
+        Destroy(gameObject);
     }
 }

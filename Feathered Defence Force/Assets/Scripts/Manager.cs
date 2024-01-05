@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,8 +21,16 @@ public class Manager : MonoBehaviour
     public GameObject audioSourcePreFab;
     public List<GameObject> audioSources;
     public List<TimerScript> audioTimers;
+
+    public List<MusicScriptable> musics;
     #endregion
 
+    #region ParticalSystem
+    [Header("Particles")]
+    public List<GameObject> particlePrefabs;
+    public List<ParticleSystem> particleSystems;
+    public List<TimerScript> particleTimers;
+    #endregion
 
     private void Awake()
     {
@@ -47,7 +56,17 @@ public class Manager : MonoBehaviour
             }
         }
         #endregion
+        for (int i = 0; i < particleTimers.Count; ++i)
+        {
+            particleTimers[i].Update();
 
+            if (particleTimers[i].Check())
+            {
+                Destroy(particleSystems[i].gameObject);
+                particleSystems.RemoveAt(i);
+                particleTimers.RemoveAt(i);
+            }
+        }
 
     }
 
@@ -94,6 +113,23 @@ public class Manager : MonoBehaviour
 
     }
 
+    public static void PlayMusic(int mID, float volume = 1)
+    {
+        PlayAudio(manager.musics[mID].musicClip, volume);
+
+    }
+
     #endregion
 
+    #region Particle
+    public static void PlayParticle(int mID, Vector3 mPosition)
+    {
+        GameObject mObject = Instantiate(manager.particlePrefabs[mID], mPosition, Quaternion.Euler(new Vector3(180, 0, 0)), manager.transform);
+        ParticleSystem mParticleSystem = mObject.GetComponent<ParticleSystem>();
+
+        manager.particleSystems.Add(mParticleSystem);
+        manager.particleTimers.Add(new TimerScript(mParticleSystem.main.startLifetime.constantMax));
+
+    }
+    #endregion
 }

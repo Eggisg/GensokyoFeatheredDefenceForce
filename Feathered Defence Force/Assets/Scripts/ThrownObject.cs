@@ -18,7 +18,7 @@ public class ThrownObject : MonoBehaviour
     void Update()
     {
         timer.Update();
-
+        speed += 1f * Time.deltaTime;
         if (target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);

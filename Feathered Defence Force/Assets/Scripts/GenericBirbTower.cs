@@ -35,7 +35,6 @@ public class GenericBirbTower : CommonInheritor
             pTimerScript.Update();
             if (pTimerScript.Check())
             {
-                Debug.Log("canshoot = true");
                 pTimerScript.Start(birbInfo.speed);
                 canShoot = true;
                 
@@ -61,6 +60,7 @@ public class GenericBirbTower : CommonInheritor
         //create object
         if (canShoot)
         {
+            canShoot = false;
             GameObject mBullet = Instantiate(birbInfo.throwablePrefab, transform.position, Quaternion.identity, transform);
             ThrownObject mBulletScript = mBullet.GetComponent<ThrownObject>();
             mBulletScript.OriginTower = this;
@@ -92,7 +92,13 @@ public class GenericBirbTower : CommonInheritor
 
     public virtual void Hit(GameObject mHitObject)
     {
+        if (audioOn)
+        {
+            Manager.PlayAudio(17, 1);
+        }
+        
         NewEnemy enemy = mHitObject.GetComponent<NewEnemy>();
+        enemy.Damage(birbInfo.damage, birbInfo.status);
 
     }
 

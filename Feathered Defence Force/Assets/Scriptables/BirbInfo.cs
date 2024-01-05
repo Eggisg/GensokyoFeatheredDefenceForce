@@ -18,6 +18,7 @@ public class BirbInfo : ScriptableObject
     public float specialFloat;
     public float aoeSize;
 
+    public Status status;
     public GameObject throwablePrefab;
 
     public void Initialize()
