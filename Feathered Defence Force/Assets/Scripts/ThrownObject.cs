@@ -18,7 +18,23 @@ public class ThrownObject : MonoBehaviour
     void Update()
     {
         timer.Update();
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+        if (target != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            if(OriginTower.targets.Count > 0)
+            {
+                target = OriginTower.Targeting(OriginTower.targetID);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        
 
         if (timer.Check())
         {
@@ -33,12 +49,13 @@ public class ThrownObject : MonoBehaviour
                 Manager.manager.linearCurve.Evaluate(timer.Progress())
             ));
 
-        if(transform.position == target.position)
+        if (target != null && transform.position == target.position)
         {
             OriginTower.Hit(target.gameObject);
             Destroy(gameObject);
         }
-        
+
+
 
     }
 }

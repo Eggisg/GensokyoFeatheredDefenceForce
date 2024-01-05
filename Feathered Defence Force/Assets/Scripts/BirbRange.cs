@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class BirbRange : MonoBehaviour
 {
-    public bool friendlyFire = false;
-    GenericBirbTower birbtower;
+    
+    public GenericBirbTower birbtower;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!friendlyFire && collision.gameObject.CompareTag("Enemy"))
+        Debug.Log("collission");
+        if (!birbtower.friendlyFire && collision.gameObject.CompareTag("Enemy"))
         {
-            birbtower.targets.Add(collision.gameObject.GetComponent<NewEnemy>());
+            Debug.Log("sent enemy data");
+            birbtower.targets.Add(collision.transform);
         }
-        else if (friendlyFire && collision.gameObject.CompareTag("Tower"))
+        else if (birbtower.friendlyFire && collision.gameObject.CompareTag("Tower"))
         {
-            birbtower.targets.Add(collision.gameObject.GetComponent<GenericBirbTower>());
+            birbtower.targets.Add(collision.transform);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        birbtower.targets.Remove(collision.transform);
     }
 }

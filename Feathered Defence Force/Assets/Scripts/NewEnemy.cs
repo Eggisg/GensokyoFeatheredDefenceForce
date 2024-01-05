@@ -23,7 +23,7 @@ public class NewEnemy : CommonInheritor
     public Transform rotation2;
     public float rotationSpeed;
 
-
+    public bool reversed;
     public List<Status> statuses;
 
 
@@ -47,20 +47,21 @@ public class NewEnemy : CommonInheritor
     {
         lerpScript.Update();
 
-        if (waypoints.Count == 0)
+        if (currentWaypoint >= waypoints.Count)
         {
             // hurt by enemyinfo.damage
             Destroy(gameObject);
         }
         else
         {
-            if (active && transform.position == waypoints[0]!.position)
+            if (active && transform.position == waypoints[currentWaypoint]!.position)
             {
-                waypoints.RemoveAt(0);
+                currentWaypoint++;
             }
 
             if (active && waypoints.Count > 0)
             {
+                Debug.Log(currentWaypoint);
                 transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
             }
         }

@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Birb", menuName = "Scriptable/Generic Birb"), Serializable]
-public abstract class BirbInfo : ScriptableObject
+[CreateAssetMenu(fileName = "New Birb", menuName = "Scriptable/GenericBirb"), Serializable]
+public class BirbInfo : ScriptableObject
 {
-    public int currentTier = 1;
-    public BirbTierInfo[] tiers = new BirbTierInfo[3];
+    public int currentTier = 0;
+    public BirbTierInfo[] tiers = new BirbTierInfo[4];
 
     public string birbname;
     public string desc;
@@ -20,6 +20,10 @@ public abstract class BirbInfo : ScriptableObject
 
     public GameObject throwablePrefab;
 
+    public void Initialize()
+    {
+        StatUpdate(0);
+    }
 
     public void Destroy()
     {
@@ -31,26 +35,33 @@ public abstract class BirbInfo : ScriptableObject
         currentTier += 1;
         switch (currentTier)
         {
-
-
             case 1:
-                
-
-                break;
+                StatUpdate(1);
+            break;
 
             case 2:
-
-
-                break;
+                StatUpdate(2);
+            break;
 
             case 3:
-
-                break;
+                StatUpdate(3);
+            break;
 
             default:
-                break;
+                StatUpdate(0);
+            break;
 
         }
+
+    }
+
+    public void StatUpdate(int tier)
+    {
+        speed = tiers[tier].speed;
+        damage = tiers[tier].damage;
+        cost = tiers[tier].cost;
+        specialFloat = tiers[tier].specialFloat;
+        aoeSize = tiers[tier].aoeSize;
     }
 
 
