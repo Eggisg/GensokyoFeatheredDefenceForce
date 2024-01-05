@@ -9,7 +9,7 @@ public class FireStatus : Status
     public float damageDelay;
     public Sprite flamePNG;
 
-    internal override void AddStatus(Enemy enemy)
+    internal override void AddStatus(NewEnemy enemy)
     {
         enemy.statuses.Add(this);
         pTimer.Start(damageDelay);

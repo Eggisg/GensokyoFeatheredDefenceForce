@@ -6,6 +6,13 @@ public class Manager : MonoBehaviour
 {
     public static Manager manager;
 
+
+
+    public List<Transform> waypoints;
+    public AnimationCurve curve;
+    public AnimationCurve linearCurve;
+    public AnimationCurve pickupCurve;
+
     #region audio
     [Header("Audio")]
     public float globalAudio;

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Birb", menuName = "Scriptable/Generic Birb"), Serializable]
 public abstract class BirbInfo : ScriptableObject
 {
     public int currentTier = 1;
@@ -15,6 +17,8 @@ public abstract class BirbInfo : ScriptableObject
     public int cost;
     public float specialFloat;
     public float aoeSize;
+
+    public GameObject throwablePrefab;
 
 
     public void Destroy()

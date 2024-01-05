@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericBirbTower : MonoBehaviour
+public class GenericBirbTower : CommonInheritor
 {
     public bool active = false;
     public bool audioOn;
     private TimerScript pTimerScript;
+    public BirbInfo birbInfo;
+    public List<CommonInheritor> targets;
+    public bool canShoot;
+    public Status status;
 
     internal virtual void Update()
     {
@@ -23,7 +27,7 @@ public class GenericBirbTower : MonoBehaviour
 
     public void ToggleAudio()
     {
-
+        audioOn = !audioOn;
     }
 
     private void PlayAudio(int mID)
@@ -32,6 +36,19 @@ public class GenericBirbTower : MonoBehaviour
         {
             Manager.PlayAudio(mID);
         }
+    }
+
+    public virtual void Shoot()
+    {
+        if (canShoot)
+        {
+            //create object
+        }
+    }
+    public virtual void Hit(GameObject mHitObject)
+    {
+        NewEnemy enemy = mHitObject.GetComponent<NewEnemy>();
+
     }
 
 }
