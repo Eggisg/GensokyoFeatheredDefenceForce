@@ -26,6 +26,7 @@ public class StoreManager : MonoBehaviour
         ////    Debug.Log($"{i} {(i % columnsAndRows.x) * 5} {(i / columnsAndRows.y) * -5}");
         ////    Vector3 newPos = new Vector2((i % columnsAndRows.x) * prefabOffsets.x, (i / columnsAndRows.y) * prefabOffsets.y);
         ////    Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform) ;
+        /// iau haty mabaisc mawth
         ////}
 
 
