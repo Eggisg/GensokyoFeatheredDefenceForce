@@ -24,8 +24,6 @@ public class GenericBirbTower : CommonInheritor
 
     internal virtual void Update()
     {
-
-        
         if (active)
         {
             if (targets.Count > 0)
@@ -67,8 +65,6 @@ public class GenericBirbTower : CommonInheritor
             mBulletScript.OriginTower = this;
             mBulletScript.target = Targeting(targetID);
         }
-
-
     }
 
     public Transform Targeting(int mID)
@@ -86,7 +82,7 @@ public class GenericBirbTower : CommonInheritor
         {
 
         }
-        return targets[0]!;
+        return targets[0]!; // Do you mean null? What's with the ! being after the thingamabob??
     }
 
 
@@ -107,5 +103,4 @@ public class GenericBirbTower : CommonInheritor
     {
 
     }
-
 }

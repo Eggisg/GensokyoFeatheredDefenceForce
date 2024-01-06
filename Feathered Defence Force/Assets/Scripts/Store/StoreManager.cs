@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StoreManager : MonoBehaviour
 {
-	public static bool storeShenanigans;
+	public bool doStore;
 	public Transform cursor;
 	public GenericBirbTower birb;
 	public List<GameObject> birbPrefabs;
@@ -21,16 +21,16 @@ public class StoreManager : MonoBehaviour
 
 	private void Start()
 	{
-		for (int i = 0; i < birbPrefabs.Count; i++)
-		{
-			Debug.Log($"{i} {(i % columnsAndRows.x) * 5} {(i / columnsAndRows.y) * -5}");
-			Vector3 newPos = new Vector2((i % columnsAndRows.x) * prefabOffsets.x, (i / columnsAndRows.y) * prefabOffsets.y);
-			Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
-		}
+		//for (int i = 0; i < birbPrefabs.Count; i++)
+		//{
+		//	Debug.Log($"{i} {(i % columnsAndRows.x) * 5} {(i / columnsAndRows.y) * -5}");
+		//	Vector3 newPos = new Vector2((i % columnsAndRows.x) * prefabOffsets.x, (i / columnsAndRows.y) * prefabOffsets.y);
+		//	Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
+		//}
 
 		for (int i = 0; i < birbPrefabs.Count; i++)
 		{
-			int row = i / columnsAndRows.x; // Why is it dividing by a null item
+			int row = i / columnsAndRows.x;
 			int col = i % columnsAndRows.x;
 
 			Debug.Log($"{i} {col * prefabOffsets.x} {row * -prefabOffsets.y}");
@@ -52,27 +52,44 @@ public class StoreManager : MonoBehaviour
 				placingtower = false;
 			}
 		}
+
+		bool prevStoreStatus = false;
+
+		if (doStore == prevStoreStatus)
+		{
+			switch (doStore)
+			{
+				case true: // If we should open the store
+					OpenStore();
+					prevStoreStatus = true;
+					return;
+
+				case false: // And if we should close the store
+					CloseStore();
+					prevStoreStatus = false;
+					return;
+			}
+		}
 	}
 
 	public void OpenStore()
 	{
-		storeShenanigans = true;
 		closedStore.SetActive(false);
 		openedStore.SetActive(true);
-		Debug.Log("Store opened");
+		Debug.Log("Store is open!");
 	}
 
 	public void CloseStore()
 	{
-		storeShenanigans = false;
 		closedStore.SetActive(true);
 		openedStore.SetActive(false);
+		Debug.Log("Store is closed?!? How am I to buy my Touhou themed blowjob now...");
 	}
 
 	public void CancelPurchase()
 	{
 		purchaseButton.SetActive(false);
-		storeShenanigans = false;
+		doStore = false;
 	}
 
 	public void ChooseBirb(GenericBirbTower birb)
@@ -82,10 +99,28 @@ public class StoreManager : MonoBehaviour
 
 	public void ConfirmBuy()
 	{
-		storeShenanigans = false;
+		doStore = false;
 		birb.PlaceTower();
 		birb = null;
 		buyingBirb.SetActive(false);
 		CloseStore();
+	}
+
+	/// <summary>
+	/// Lets a button call the method to switch doStore, depending on the input.
+	/// </summary>
+	/// <param name="input"></param>
+	public void ChangeDoStore(bool input)
+	{
+		switch (input)
+		{
+			case true:
+				doStore = true;
+				break;
+
+			case false:
+				doStore = false;
+				break;
+		}
 	}
 }
