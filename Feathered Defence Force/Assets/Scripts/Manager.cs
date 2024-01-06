@@ -28,9 +28,10 @@ public class Manager : MonoBehaviour
     public GameObject musicSourcePrefab;
     public MusicShowcaseObjects attObject;
     public float musicAttPhaseDelay;
-    TimerScript musicTimerScript = new TimerScript(0);
+    public TimerScript musicTimerScript = new TimerScript(0);
     int musicTimerPhase;
     int musicidskip;
+    bool musicPlaying;
     #endregion
 
     #region ParticalSystem
@@ -40,6 +41,10 @@ public class Manager : MonoBehaviour
     public List<TimerScript> particleTimers;
     #endregion
 
+
+    #region misc
+    public float bossSize, enemySize;
+    #endregion
     private void Awake()
     {
         manager = this; 
@@ -48,7 +53,7 @@ public class Manager : MonoBehaviour
     {
         //start all 3 of the musics
 
-
+        InstanstiateMusic();
 
     }
 
@@ -66,53 +71,56 @@ public class Manager : MonoBehaviour
                 audioTimers.RemoveAt(i);
             }
         }
-
-        if (musicTimerPhase < 4)
+        if (musicPlaying)
         {
-            musicTimerScript.Update();
-
-
-
-
-            if (musicTimerPhase == 1)
+            if (musicTimerPhase < 4)
             {
-                for (int i = 0; i < musics.Count; ++i)
+                musicTimerScript.Update();
+
+
+
+
+                if (musicTimerPhase == 1)
                 {
-                    if (i != musicidskip)
+                    for (int i = 0; i < musics.Count; ++i)
                     {
-                        musicSources[i].volume = (1 - musicTimerScript.Progress()) * globalAudio;
+                        if (i != musicidskip)
+                        {
+                            musicSources[i].volume = (1 - musicTimerScript.Progress()) * globalAudio;
+                        }
+                        else
+                        {
+                            musicSources[i].volume = musicTimerScript.Progress();
+                        }
                     }
-                    else
-                    {
-                        musicSources[i].volume = musicTimerScript.Progress();
-                    }
+
+
+
+                    attObject.AttributionObject.position = Vector3.Lerp
+                        (
+                            attObject.offScreenPoint.position,
+                            attObject.onScreenPoint.position,
+                            linearCurve.Evaluate(musicTimerScript.Progress())
+                        );
+                }
+                if (musicTimerPhase == 3)
+                {
+                    attObject.AttributionObject.position = Vector3.Lerp
+                        (
+                            attObject.onScreenPoint.position,
+                            attObject.offScreenPoint.position,
+                            linearCurve.Evaluate(musicTimerScript.Progress())
+                        );
                 }
 
-
-
-                attObject.AttributionObject.position = Vector3.Lerp
-                    (
-                        attObject.offScreenPoint.position,
-                        attObject.onScreenPoint.position,
-                        linearCurve.Evaluate(musicTimerScript.Progress())
-                    );
-            }
-            if (musicTimerPhase == 3)
-            {
-                attObject.AttributionObject.position = Vector3.Lerp
-                    (
-                        attObject.onScreenPoint.position,
-                        attObject.offScreenPoint.position,
-                        linearCurve.Evaluate(musicTimerScript.Progress())
-                    );
-            }
-
-            if (musicTimerScript.Check())
-            {
-                musicTimerScript.Restart();
-                musicTimerPhase++;
+                if (musicTimerScript.Check())
+                {
+                    musicTimerScript.Restart();
+                    musicTimerPhase++;
+                }
             }
         }
+       
 
         
         #endregion
@@ -179,8 +187,9 @@ public class Manager : MonoBehaviour
         mVolume = Mathf.Clamp01(mVolume);
         mVolume *= manager.globalAudio;
         
-
+        manager.musicPlaying = true;
         GameObject mGameObject = Instantiate(manager.musicSourcePrefab, manager.transform.position, Quaternion.identity, manager.transform);
+        manager.attObject = mGameObject.GetComponent<MusicShowcaseObjects>();
         AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
         mAudioSource.clip = manager.musics[mID].musicClip;
 
@@ -198,7 +207,7 @@ public class Manager : MonoBehaviour
     {
         foreach (MusicScriptable music in musics)
         {
-
+            musicSources.Add(Instantiate(musicSourcePrefab, transform.position, Quaternion.identity, transform).GetComponent<AudioSource>());
         }
     }
 

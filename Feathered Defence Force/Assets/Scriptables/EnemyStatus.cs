@@ -8,12 +8,11 @@ public abstract class EnemyStatus : ScriptableObject
     protected TimerScript pTimer = new TimerScript(0); // create timer
     public float duration; // how long until it game ends itself
     private float pTime = 0; //^
-    protected NewEnemy pEnemy; // the script its attached to
+    [SerializeField] public NewEnemy enemy; // the script its attached to
     
 
-    internal virtual void AddStatus(NewEnemy enemy) //called on adding
+    internal virtual void Instantiate() //called on adding
     {
-        enemy.statuses.Add(this);
         TimerStart();
     }
     internal void Update()
@@ -34,7 +33,7 @@ public abstract class EnemyStatus : ScriptableObject
     }
     internal virtual void Remove()
     {
-        pEnemy.statuses.Remove(this);
+        enemy.statuses.Remove(this);
     }
     internal virtual void TimerDone()
     {

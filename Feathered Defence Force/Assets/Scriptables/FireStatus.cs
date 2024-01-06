@@ -3,23 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New FireStatus", menuName = "Scriptable/Status/eFire"), Serializable]
 public class FireStatus : EnemyStatus
 {
     public float damage;
     public float damageDelay;
-    public Sprite flamePNG;
     
 
-    internal override void AddStatus(NewEnemy enemy)
+    internal override void Instantiate()
     {
-
-
-        base.AddStatus(enemy);
+        base.Instantiate();
     }
 
     internal override void TimerDone()
     {
-        pEnemy.Damage(damage * pEnemy.fireMultiplier);
+        enemy.Damage(damage * enemy.fireMultiplier);
 
         base.TimerDone();
     }

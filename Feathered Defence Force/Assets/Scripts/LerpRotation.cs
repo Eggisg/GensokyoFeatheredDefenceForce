@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class LerpScript
+public class LerpRotation
 {
 
     public TimerScript timerScript = new TimerScript(0);
-    public bool curved;
+    public bool curved = true;
     public Vector3 point1, point2;
     public Transform objectToRotate;
     public AnimationCurve curve;

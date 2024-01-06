@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class MusicShowcaseObjects : MonoBehaviour
 {
-    public Transform offScreenPoint;
-    public Transform onScreenPoint;
-    public Transform AttributionObject;
+    public RectTransform offScreenPoint;
+    public RectTransform onScreenPoint;
+    public RectTransform AttributionObject;
     public TextMeshProUGUI TextAttributionObject;
 
     private void Start()

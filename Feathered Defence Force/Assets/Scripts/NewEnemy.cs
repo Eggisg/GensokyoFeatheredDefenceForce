@@ -7,31 +7,55 @@ using UnityEngine;
 
 public class NewEnemy : CommonInheritor
 {
+    [Header("Enemy Related")]
     private List<Transform> waypoints = new List<Transform>();
     public bool active = true;
     public int currentWaypoint;
     public float speed;
     public float health;
-    public bool debuttoggle;
     public EnemyInfo enemyinfo;
-    public float fireMultiplier;
-    public bool onFire;
 
-    [Header("sprite")]
-    public LerpScript lerpScript = new LerpScript();
+
+    [Header("Fire Related")]
+    public float fireMultiplier = 1f;
+    public bool onFire;
+    public LerpVector3 fireScaleLerper;
+    public Transform fireVisual;
+    public Transform fireScale1;
+    public Transform fireScale2;
+
+
+
+    [Header("Sprite Related")]
+    public float rotationSpeed;
+    public LerpRotation lerpScript = new LerpRotation();
     public SpriteRenderer spriteRenderer;
     public Transform sprite;
     public Transform rotation1;
     public Transform rotation2;
-    public float rotationSpeed;
 
+    [Header("Status Related/misc")]
     public bool reversed;
     public List<EnemyStatus> statuses;
 
+    public Color shellOil;
+    public bool oiled;
+    public TimerScript oilTimer;
+    public LerpColour colorLerp;
+
+    [Header("OnHurt Related")]
+    public float colorHurtTime;
     public Color hurt;
     public Color Normal;
     private TimerScript pColorTimer;
-    public float colorHurtTime;
+
+
+    [Header("Debug Related")]
+    public bool debugAddFire;
+    public FireStatus debugFire;
+
+    public bool debugAddShellOil;
+    public OiledStatus debugOil;
 
     private void Start()
     {
@@ -47,16 +71,39 @@ public class NewEnemy : CommonInheritor
         gameObject.tag = "Enemy";
 
         pColorTimer = new TimerScript(colorHurtTime);
-
-
+        oilTimer = new TimerScript(1);
+        colorLerp = new LerpColour();
+        fireScaleLerper = new LerpVector3();
+        fireScaleLerper.StartEndlessLerping(fireScale1.localScale, fireScale2.localScale, fireVisual, Manager.manager.curve, 1);
     }
 
     private void Update()
     {
+        if (debugAddFire)
+        {
+            debugAddFire = false;
+            Damage(0, debugFire);
+        }
+        if (debugAddShellOil)
+        {
+            debugAddShellOil = false;
+            Damage(0, debugOil);
+        }
+
         lerpScript.Update();
         pColorTimer.Update();
+        fireScaleLerper.Update();
+        colorLerp.Update();
 
-        sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, Normal, Manager.manager.linearCurve.Evaluate(pColorTimer.Progress()));
+        if (!oiled)
+        {
+            sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, Normal, Manager.manager.linearCurve.Evaluate(pColorTimer.Progress()));
+        }
+        else
+        {
+            sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, shellOil, Manager.manager.linearCurve.Evaluate(pColorTimer.Progress()));
+        }
+        
 
         if (currentWaypoint >= waypoints.Count)
         {
@@ -65,8 +112,6 @@ public class NewEnemy : CommonInheritor
         }
         else
         {
-
-
             if (active && waypoints.Count > 0)
             {
                 transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
@@ -78,33 +123,36 @@ public class NewEnemy : CommonInheritor
         }
 
         CalculateFireMultiplier();
-        CheckIfOnFire();
-        foreach (EnemyStatus status in statuses)
+        fireVisual.gameObject.SetActive(CheckIfOnFire());
+
+
+        for (int i = 0; i < statuses.Count; i++)
         {
-            status.Update();
+            statuses[i].Update();
         }
+
     }
 
     public void Damage(float mAmount, EnemyStatus mNewStatus = null)
     {
-        //play a sound
-        
-        //enable/update healthbar
 
         health -= mAmount;
         if (health <= 0)
         {
             Kill();
         }
-        else
+        else if (mAmount > 0)
         {
             Manager.PlayAudio(14, 0.5f);
             pColorTimer.Start(colorHurtTime);
         }
 
-        if(mNewStatus != null)
+        if (mNewStatus != null)
         {
-            statuses.Add(mNewStatus);
+            EnemyStatus newStatus = Instantiate(mNewStatus);
+            newStatus.enemy = this;
+            newStatus.Instantiate();
+            statuses.Add(newStatus);
         }
 
     }
@@ -129,19 +177,35 @@ public class NewEnemy : CommonInheritor
     private float CalculateFireMultiplier()
     {
         fireMultiplier = 1f;
-        foreach (OiledStatus oiled in statuses)
+        oiled = false;
+
+        foreach (EnemyStatus status in statuses)
         {
-            fireMultiplier *= 1.4f;
+            OiledStatus oiledStatus = status as OiledStatus;
+
+            if (oiledStatus != null)
+            {
+                fireMultiplier *= 1.4f;
+                oiled = true;
+            }
         }
+
         return fireMultiplier;
     }
     private bool CheckIfOnFire(bool enableVisual = false)
     {
         onFire = false;
-        foreach (FireStatus fire in statuses)
+        foreach (EnemyStatus status in statuses)
         {
-            onFire = true;
+            FireStatus firestatus = status as FireStatus;
+
+            if (firestatus != null)
+            {
+                onFire = true;
+            }
         }
+
         return onFire;
     }
+
 }
