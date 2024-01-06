@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79746f4a7087cab4fa6f6c4c254b5fb8, type: 3}
   m_Name: Wave Intermission
   m_EditorClassIdentifier: 
-  musicName: 
-  musicClip: {fileID: 0}
+  musicName: Eric Skiff - Underclocked
+  musicClip: {fileID: 8300000, guid: 3e96ba36ce127684f83661c921728789, type: 3}

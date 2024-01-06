@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79746f4a7087cab4fa6f6c4c254b5fb8, type: 3}
   m_Name: Mainmenu
   m_EditorClassIdentifier: 
-  musicName: 
-  musicClip: {fileID: 0}
+  musicName: 'Jeremy Blake - Powerup! '
+  musicClip: {fileID: 8300000, guid: fbb0baf4422ec6e47be2a874d942186c, type: 3}

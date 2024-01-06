@@ -23,6 +23,14 @@ public class Manager : MonoBehaviour
     public List<TimerScript> audioTimers;
 
     public List<MusicScriptable> musics;
+    public List<AudioSource> musicSources;
+    public GameObject musicAttPrefab;
+    public GameObject musicSourcePrefab;
+    public MusicShowcaseObjects attObject;
+    public float musicAttPhaseDelay;
+    TimerScript musicTimerScript = new TimerScript(0);
+    int musicTimerPhase;
+    int musicidskip;
     #endregion
 
     #region ParticalSystem
@@ -38,7 +46,10 @@ public class Manager : MonoBehaviour
     }
     void Start()
     {
-        
+        //start all 3 of the musics
+
+
+
     }
 
     void Update()
@@ -55,7 +66,40 @@ public class Manager : MonoBehaviour
                 audioTimers.RemoveAt(i);
             }
         }
+
+        if (musicTimerPhase < 4)
+        {
+            musicTimerScript.Update();
+
+            if (musicTimerPhase == 1)
+            {
+                attObject.AttributionObject.position = Vector3.Lerp
+                    (
+                        attObject.offScreenPoint.position,
+                        attObject.onScreenPoint.position,
+                        linearCurve.Evaluate(musicTimerScript.Progress())
+                    );
+            }
+            if (musicTimerPhase == 3)
+            {
+                attObject.AttributionObject.position = Vector3.Lerp
+                    (
+                        attObject.onScreenPoint.position,
+                        attObject.offScreenPoint.position,
+                        linearCurve.Evaluate(musicTimerScript.Progress())
+                    );
+            }
+
+            if (musicTimerScript.Check())
+            {
+                musicTimerScript.Restart();
+                musicTimerPhase++;
+            }
+        }
+
+        
         #endregion
+        #region Particle
         for (int i = 0; i < particleTimers.Count; ++i)
         {
             particleTimers[i].Update();
@@ -67,7 +111,7 @@ public class Manager : MonoBehaviour
                 particleTimers.RemoveAt(i);
             }
         }
-
+        #endregion
     }
 
     #region audio
@@ -113,10 +157,32 @@ public class Manager : MonoBehaviour
 
     }
 
-    public static void PlayMusic(int mID, float volume = 1)
+    public static void PlayMusic(int mID, float mVolume = 1)
     {
-        PlayAudio(manager.musics[mID].musicClip, volume);
+        mVolume = Mathf.Clamp01(mVolume);
+        mVolume *= manager.globalAudio;
 
+
+        GameObject mGameObject = Instantiate(manager.musicSourcePrefab, manager.transform.position, Quaternion.identity, manager.transform);
+        AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
+        mAudioSource.clip = manager.musics[mID].musicClip;
+
+        manager.attObject.TextAttributionObject.text = manager.musics[mID].musicName;
+        manager.musicTimerScript.Start(manager.musicAttPhaseDelay);
+        manager.musicTimerPhase = 1;
+
+
+
+
+
+    }
+
+    private void InstanstiateMusic()
+    {
+        foreach (MusicScriptable music in musics)
+        {
+
+        }
     }
 
     #endregion
