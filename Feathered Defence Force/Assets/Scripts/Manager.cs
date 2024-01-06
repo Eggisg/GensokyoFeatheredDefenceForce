@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Manager : MonoBehaviour
@@ -8,7 +10,8 @@ public class Manager : MonoBehaviour
     public static Manager manager;
 
 
-
+    public int playerMoney;
+    public TextMeshProUGUI moneytext;
     public List<Transform> waypoints;
     public AnimationCurve curve;
     public AnimationCurve linearCurve;
@@ -32,6 +35,8 @@ public class Manager : MonoBehaviour
     int musicTimerPhase;
     int musicidskip;
     bool musicPlaying;
+
+    public int chimataStockManipulation = 0;
     #endregion
 
     #region ParticalSystem
@@ -220,6 +225,16 @@ public class Manager : MonoBehaviour
         }
 
 
+    }
+
+    public static void AddMonye(int monye)
+    {
+        if (UnityEngine.Random.Range(0, 101) <= 10)
+        {
+            monye += manager.chimataStockManipulation;
+        }
+        manager.playerMoney += monye;
+        manager.moneytext.text = manager.playerMoney.ToString();
     }
 
     #endregion

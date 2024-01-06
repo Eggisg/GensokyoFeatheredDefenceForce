@@ -14,6 +14,7 @@ public class GenericBirbTower : CommonInheritor
     public bool canShoot;
     public EnemyStatus status;
     public int targetID;
+    public bool canPlace;
 
     internal virtual void Start()
     {
@@ -99,6 +100,11 @@ public class GenericBirbTower : CommonInheritor
         
         NewEnemy enemy = mHitObject.GetComponent<NewEnemy>();
         enemy.Damage(birbInfo.damage, birbInfo.status);
+
+    }
+
+    public void PlaceTower()
+    {
 
     }
 

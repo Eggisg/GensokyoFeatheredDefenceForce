@@ -16,6 +16,6 @@ public class MusicShowcaseObjects : MonoBehaviour
     }
     public void DebugButton()
     {
-        Manager.PlayMusic(1, 1);
+        Manager.PlayMusic(3, 1);
     }
 }
