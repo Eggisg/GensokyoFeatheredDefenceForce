@@ -46,7 +46,7 @@ public class ThrownObject : MonoBehaviour
             (
                 Quaternion.identity.eulerAngles, 
                 new Vector3(0, 0, 360),
-                Manager.manager.linearCurve.Evaluate(timer.Progress())
+                Manager.instance.linearCurve.Evaluate(timer.Progress())
             ));
 
         if (target != null && transform.position == target.position)

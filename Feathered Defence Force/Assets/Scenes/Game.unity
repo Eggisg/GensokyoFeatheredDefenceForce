@@ -3454,10 +3454,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: i want to shoot myself
+  m_text: i want to be nice and kind to myself by taking good care of my wellbeing
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3481,12 +3481,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 9
+  m_fontSizeBase: 9
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMin: 0.9
+  m_fontSizeMax: 70.11
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -5502,6 +5502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1354466424}
+  - component: {fileID: 1354466425}
   m_Layer: 5
   m_Name: StoreManager
   m_TagString: Untagged
@@ -5529,6 +5530,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1354466425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354466423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c79db63d3e5ef49843a9cdfe2fcda9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 19253468}
+  birb: {fileID: 150137756}
+  birbPrefabs:
+  - {fileID: 132149744}
+  closedStore: {fileID: 570669937}
+  openedStore: {fileID: 1275582887}
+  buyingBirb: {fileID: 1769469360}
+  purchaseButton: {fileID: 1800794646}
+  placingtower: 0
+  prefabOffsets: {x: 0, y: 0}
+  firstSpot: {fileID: 0}
+  columnsAndRows: {x: 0, y: 0}
 --- !u!1 &1360233942
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,26 +34,27 @@ public class BirbInfo : ScriptableObject
     {
         //if enough money and not max tier
         currentTier += 1;
-        switch (currentTier)
-        {
-            case 1:
-                StatUpdate(1);
-            break;
+        //switch (currentTier) // ??? Why the switch
+        //{
+        //    case 1:
+        //        StatUpdate(1);
+        //    break;
 
-            case 2:
-                StatUpdate(2);
-            break;
+        //    case 2:
+        //        StatUpdate(2);
+        //    break;
 
-            case 3:
-                StatUpdate(3);
-            break;
+        //    case 3:
+        //        StatUpdate(3);
+        //    break;
 
-            default:
-                StatUpdate(0);
-            break;
+        //    default:
+        //        StatUpdate(0);
+        //    break;
 
-        }
+        //}
 
+        StatUpdate(currentTier);
     }
 
     public void StatUpdate(int tier)

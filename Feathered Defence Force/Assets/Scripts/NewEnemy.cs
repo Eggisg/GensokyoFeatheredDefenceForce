@@ -60,8 +60,8 @@ public class NewEnemy : CommonInheritor
 
     private void Start()
     {
-        lerpScript.StartEndlessRotation(rotation1.rotation.eulerAngles, rotation2.rotation.eulerAngles, sprite, Manager.manager.curve, rotationSpeed);
-        waypoints = Manager.manager.waypoints;
+        lerpScript.StartEndlessRotation(rotation1.rotation.eulerAngles, rotation2.rotation.eulerAngles, sprite, Manager.instance.curve, rotationSpeed);
+        waypoints = Manager.instance.waypoints;
         sprite = transform.GetChild(0);
 
         spriteRenderer.sprite = enemyinfo.sprite;
@@ -75,7 +75,7 @@ public class NewEnemy : CommonInheritor
         oilTimer = new TimerScript(1);
         colorLerp = new LerpColour();
         fireScaleLerper = new LerpVector3();
-        fireScaleLerper.StartEndlessLerping(fireScale1.localScale, fireScale2.localScale, fireVisual, Manager.manager.curve, 1);
+        fireScaleLerper.StartEndlessLerping(fireScale1.localScale, fireScale2.localScale, fireVisual, Manager.instance.curve, 1);
     }
 
     private void Update()
@@ -98,11 +98,11 @@ public class NewEnemy : CommonInheritor
 
         if (!oiled)
         {
-            sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, Normal, Manager.manager.linearCurve.Evaluate(pColorTimer.Progress()));
+            sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, Normal, Manager.instance.linearCurve.Evaluate(pColorTimer.Progress()));
         }
         else
         {
-            sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, shellOil, Manager.manager.linearCurve.Evaluate(pColorTimer.Progress()));
+            sprite.GetComponent<SpriteRenderer>().color = Color.Lerp(hurt, shellOil, Manager.instance.linearCurve.Evaluate(pColorTimer.Progress()));
         }
         
 

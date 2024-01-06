@@ -7,8 +7,7 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    public static Manager manager;
-
+    public static Manager instance;
 
     public int playerMoney;
     public TextMeshProUGUI moneytext;
@@ -46,20 +45,19 @@ public class Manager : MonoBehaviour
     public List<TimerScript> particleTimers;
     #endregion
 
-
     #region misc
     public float bossSize, enemySize;
     #endregion
+
     private void Awake()
     {
-        manager = this; 
+        instance = this; 
     }
+
     void Start()
     {
         //start all 3 of the musics
-
         InstanstiateMusic();
-
     }
 
     void Update()
@@ -76,14 +74,12 @@ public class Manager : MonoBehaviour
                 audioTimers.RemoveAt(i);
             }
         }
+
         if (musicPlaying)
         {
             if (musicTimerPhase < 4)
             {
                 musicTimerScript.Update();
-
-
-
 
                 if (musicTimerPhase == 1)
                 {
@@ -98,8 +94,6 @@ public class Manager : MonoBehaviour
                             musicSources[i].volume = musicTimerScript.Progress();
                         }
                     }
-
-
 
                     attObject.AttributionObject.position = Vector3.Lerp
                         (
@@ -125,10 +119,8 @@ public class Manager : MonoBehaviour
                 }
             }
         }
-       
-
-        
         #endregion
+
         #region Particle
         for (int i = 0; i < particleTimers.Count; ++i)
         {
@@ -148,20 +140,19 @@ public class Manager : MonoBehaviour
     public static void PlayAudio(int mID, float volume = 1)
     {
         volume = Mathf.Clamp01(volume);
-        volume *= manager.globalAudio;
-        GameObject mGameObject = Instantiate(manager.audioSourcePreFab, manager.transform.position, Quaternion.identity, manager.transform);
+        volume *= instance.globalAudio;
+        GameObject mGameObject = Instantiate(instance.audioSourcePreFab, instance.transform.position, Quaternion.identity, instance.transform);
         AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
 
         //diff
-        mAudioSource.clip = manager.audios[mID];
-        manager.audioTimers.Add(new TimerScript(manager.audios[mID].length));
+        mAudioSource.clip = instance.audios[mID];
+        instance.audioTimers.Add(new TimerScript(instance.audios[mID].length));
 
-        manager.audioSources.Add(mGameObject);
+        instance.audioSources.Add(mGameObject);
         mAudioSource.volume = volume;
         mAudioSource.Play();
 
     }
-
 
     /// <summary>
     /// plays a requested audioclip on a new object
@@ -171,17 +162,17 @@ public class Manager : MonoBehaviour
     public static void PlayAudio(AudioClip clip, float volume = 1)
     {
         volume = Mathf.Clamp01(volume);
-        volume *= manager.globalAudio;
-        GameObject mGameObject = Instantiate(manager.audioSourcePreFab, manager.transform.position, Quaternion.identity, manager.transform);
+        volume *= instance.globalAudio;
+        GameObject mGameObject = Instantiate(instance.audioSourcePreFab, instance.transform.position, Quaternion.identity, instance.transform);
         AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
 
 
         //diff
         mAudioSource.clip = clip;
-        manager.audioTimers.Add(new TimerScript(clip.length));
+        instance.audioTimers.Add(new TimerScript(clip.length));
 
 
-        manager.audioSources.Add(mGameObject);
+        instance.audioSources.Add(mGameObject);
         mAudioSource.volume = volume;
         mAudioSource.Play();
 
@@ -190,26 +181,21 @@ public class Manager : MonoBehaviour
     public static void PlayMusic(int mID, float mVolume = 1)
     {
         mVolume = Mathf.Clamp01(mVolume);
-        mVolume *= manager.globalAudio;
+        mVolume *= instance.globalAudio;
         
-        manager.musicPlaying = true;
+        instance.musicPlaying = true;
 
-        for (int i = 0; i < manager.musicSources.Count; i++)
+        for (int i = 0; i < instance.musicSources.Count; i++)
         {
-            manager.musicSources[i].volume = 0;
+            instance.musicSources[i].volume = 0;
         }
-        manager.musicSources[mID].volume = mVolume;
-        manager.musicSources[mID].Play();
-        manager.musicidskip = mID;
+        instance.musicSources[mID].volume = mVolume;
+        instance.musicSources[mID].Play();
+        instance.musicidskip = mID;
 
-        manager.attObject.TextAttributionObject.text = manager.musics[mID].musicName;
-        manager.musicTimerScript.Start(manager.musicAttPhaseDelay);
-        manager.musicTimerPhase = 1;
-
-
-
-
-
+        instance.attObject.TextAttributionObject.text = instance.musics[mID].musicName;
+        instance.musicTimerScript.Start(instance.musicAttPhaseDelay);
+        instance.musicTimerPhase = 1;
     }
 
     private void InstanstiateMusic()
@@ -220,33 +206,29 @@ public class Manager : MonoBehaviour
             AudioSource audioSource = newsource.GetComponent<AudioSource>();
             audioSource.clip = musics[i].musicClip;
             
-
             musicSources.Add(audioSource);
         }
-
-
     }
 
     public static void AddMonye(int monye)
     {
         if (UnityEngine.Random.Range(0, 101) <= 10)
         {
-            monye += manager.chimataStockManipulation;
+            monye += instance.chimataStockManipulation;
         }
-        manager.playerMoney += monye;
-        manager.moneytext.text = manager.playerMoney.ToString();
+        instance.playerMoney += monye;
+        instance.moneytext.text = instance.playerMoney.ToString();
     }
-
     #endregion
 
     #region Particle
     public static void PlayParticle(int mID, Vector3 mPosition)
     {
-        GameObject mObject = Instantiate(manager.particlePrefabs[mID], mPosition, Quaternion.Euler(new Vector3(180, 0, 0)), manager.transform);
+        GameObject mObject = Instantiate(instance.particlePrefabs[mID], mPosition, Quaternion.Euler(new Vector3(180, 0, 0)), instance.transform);
         ParticleSystem mParticleSystem = mObject.GetComponent<ParticleSystem>();
 
-        manager.particleSystems.Add(mParticleSystem);
-        manager.particleTimers.Add(new TimerScript(mParticleSystem.main.startLifetime.constantMax));
+        instance.particleSystems.Add(mParticleSystem);
+        instance.particleTimers.Add(new TimerScript(mParticleSystem.main.startLifetime.constantMax));
 
     }
     #endregion
