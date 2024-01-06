@@ -53,22 +53,15 @@ public class StoreManager : MonoBehaviour
 			}
 		}
 
-		bool prevStoreStatus = false;
-
-		if (doStore == prevStoreStatus)
+		switch (doStore)
 		{
-			switch (doStore)
-			{
-				case true: // If we should open the store
-					OpenStore();
-					prevStoreStatus = true;
-					return;
+			case true: // If we should open the store
+				OpenStore();
+				break;
 
-				case false: // And if we should close the store
-					CloseStore();
-					prevStoreStatus = false;
-					return;
-			}
+			case false: // And if we should close the store
+				CloseStore();
+				break;
 		}
 	}
 
@@ -103,7 +96,6 @@ public class StoreManager : MonoBehaviour
 		birb.PlaceTower();
 		birb = null;
 		buyingBirb.SetActive(false);
-		CloseStore();
 	}
 
 	/// <summary>
