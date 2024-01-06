@@ -12,7 +12,7 @@ public class GenericBirbTower : CommonInheritor
     public BirbInfo birbInfo;
     public List<Transform> targets;
     public bool canShoot;
-    public Status status;
+    public EnemyStatus status;
     public int targetID;
 
     internal virtual void Start()

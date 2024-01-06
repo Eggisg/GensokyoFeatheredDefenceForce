@@ -14,6 +14,8 @@ public class NewEnemy : CommonInheritor
     public float health;
     public bool debuttoggle;
     public EnemyInfo enemyinfo;
+    public float fireMultiplier;
+    public bool onFire;
 
     [Header("sprite")]
     public LerpScript lerpScript = new LerpScript();
@@ -24,7 +26,7 @@ public class NewEnemy : CommonInheritor
     public float rotationSpeed;
 
     public bool reversed;
-    public List<Status> statuses;
+    public List<EnemyStatus> statuses;
 
     public Color hurt;
     public Color Normal;
@@ -75,13 +77,15 @@ public class NewEnemy : CommonInheritor
             }
         }
 
-        foreach (Status status in statuses)
+        CalculateFireMultiplier();
+        CheckIfOnFire();
+        foreach (EnemyStatus status in statuses)
         {
             status.Update();
         }
     }
 
-    public void Damage(float mAmount, Status mNewStatus = null)
+    public void Damage(float mAmount, EnemyStatus mNewStatus = null)
     {
         //play a sound
         
@@ -119,5 +123,25 @@ public class NewEnemy : CommonInheritor
 
         //drop monye
         Destroy(gameObject);
+    }
+
+
+    private float CalculateFireMultiplier()
+    {
+        fireMultiplier = 1f;
+        foreach (OiledStatus oiled in statuses)
+        {
+            fireMultiplier *= 1.4f;
+        }
+        return fireMultiplier;
+    }
+    private bool CheckIfOnFire(bool enableVisual = false)
+    {
+        onFire = false;
+        foreach (FireStatus fire in statuses)
+        {
+            onFire = true;
+        }
+        return onFire;
     }
 }
