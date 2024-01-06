@@ -71,8 +71,25 @@ public class Manager : MonoBehaviour
         {
             musicTimerScript.Update();
 
+
+
+
             if (musicTimerPhase == 1)
             {
+                for (int i = 0; i < musics.Count; ++i)
+                {
+                    if (i != musicidskip)
+                    {
+                        musicSources[i].volume = (1 - musicTimerScript.Progress()) * globalAudio;
+                    }
+                    else
+                    {
+                        musicSources[i].volume = musicTimerScript.Progress();
+                    }
+                }
+
+
+
                 attObject.AttributionObject.position = Vector3.Lerp
                     (
                         attObject.offScreenPoint.position,
@@ -161,7 +178,7 @@ public class Manager : MonoBehaviour
     {
         mVolume = Mathf.Clamp01(mVolume);
         mVolume *= manager.globalAudio;
-
+        
 
         GameObject mGameObject = Instantiate(manager.musicSourcePrefab, manager.transform.position, Quaternion.identity, manager.transform);
         AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
