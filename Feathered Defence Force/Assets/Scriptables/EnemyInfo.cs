@@ -11,7 +11,8 @@ public class EnemyInfo : ScriptableObject
     public float hp;
     public int damage;
     public float speed;
-    public float reward;
+    public float maxReward;
+    public float minReward;
     public Sprite sprite;
     
 }

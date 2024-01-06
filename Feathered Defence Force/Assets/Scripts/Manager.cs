@@ -188,10 +188,14 @@ public class Manager : MonoBehaviour
         mVolume *= manager.globalAudio;
         
         manager.musicPlaying = true;
-        GameObject mGameObject = Instantiate(manager.musicSourcePrefab, manager.transform.position, Quaternion.identity, manager.transform);
-        manager.attObject = mGameObject.GetComponent<MusicShowcaseObjects>();
-        AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
-        mAudioSource.clip = manager.musics[mID].musicClip;
+
+        for (int i = 0; i < manager.musicSources.Count; i++)
+        {
+            manager.musicSources[i].volume = 0;
+        }
+        manager.musicSources[mID].volume = mVolume;
+        manager.musicSources[mID].Play();
+        manager.musicidskip = mID;
 
         manager.attObject.TextAttributionObject.text = manager.musics[mID].musicName;
         manager.musicTimerScript.Start(manager.musicAttPhaseDelay);
@@ -205,10 +209,17 @@ public class Manager : MonoBehaviour
 
     private void InstanstiateMusic()
     {
-        foreach (MusicScriptable music in musics)
+        for (int i = 0; i < musics.Count; i++)
         {
-            musicSources.Add(Instantiate(musicSourcePrefab, transform.position, Quaternion.identity, transform).GetComponent<AudioSource>());
+            GameObject newsource = Instantiate(musicSourcePrefab, transform.position, Quaternion.identity, transform);
+            AudioSource audioSource = newsource.GetComponent<AudioSource>();
+            audioSource.clip = musics[i].musicClip;
+            
+
+            musicSources.Add(audioSource);
         }
+
+
     }
 
     #endregion

@@ -14,6 +14,7 @@ public class NewEnemy : CommonInheritor
     public float speed;
     public float health;
     public EnemyInfo enemyinfo;
+    public float distance;
 
 
     [Header("Fire Related")]
@@ -115,6 +116,7 @@ public class NewEnemy : CommonInheritor
             if (active && waypoints.Count > 0)
             {
                 transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
+                distance = Vector3.Distance(transform.position, waypoints[currentWaypoint].position) + currentWaypoint * -100;
             }
             if (active && transform.position == waypoints[currentWaypoint]!.position)
             {

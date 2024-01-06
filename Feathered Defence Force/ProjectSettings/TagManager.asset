@@ -8,6 +8,7 @@ TagManager:
   - cursor
   - Tower
   - Enemy
+  - Path
   layers:
   - Default
   - TransparentFX
