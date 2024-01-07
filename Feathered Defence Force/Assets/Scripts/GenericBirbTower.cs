@@ -15,11 +15,13 @@ public class GenericBirbTower : CommonInheritor
     public EnemyStatus status;
     public int targetID;
     public bool canPlace;
+    public BirbRange range;
 
     internal virtual void Start()
     {
         Debug.Log(birbInfo.speed);
         pTimerScript = new TimerScript(birbInfo.speed);
+        birbInfo = Instantiate(birbInfo);
     }
 
     internal virtual void Update()
@@ -39,6 +41,7 @@ public class GenericBirbTower : CommonInheritor
                 
             }
         }
+        
     }
 
     public void ToggleAudio()
@@ -101,6 +104,9 @@ public class GenericBirbTower : CommonInheritor
 
     public void PlaceTower()
     {
-
+        Debug.Log("tf2 sexupdate");
+        active = true;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 44);
+        range.showCollider = false;
     }
 }

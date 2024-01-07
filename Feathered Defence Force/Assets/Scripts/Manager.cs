@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Animations;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class Manager : MonoBehaviour
@@ -57,13 +58,22 @@ public class Manager : MonoBehaviour
 	void Start()
 	{
 		//start all 3 of the musics
+		instance.playerMoney = 0;
 		InstanstiateMusic();
 	}
 
 	void Update()
 	{
-		#region audio
-		for (int i = 0; i < audioTimers.Count; ++i)
+        #region Debug
+		if (Input.GetKey(KeyCode.Q))
+		{
+			AddMonye(200);
+		}
+        #endregion
+
+
+        #region audio
+        for (int i = 0; i < audioTimers.Count; ++i)
 		{
 			audioTimers[i].Update();
 
@@ -87,7 +97,8 @@ public class Manager : MonoBehaviour
 					{
 						if (i != musicidskip)
 						{
-							musicSources[i].volume = (1 - musicTimerScript.Progress()) * globalAudio;
+							float startvolume = musicSources[i].volume;
+							musicSources[i].volume = Mathf.Clamp(startvolume - musicTimerScript.Progress(), 0, 1) * globalAudio;
 						}
 						else
 						{
@@ -102,7 +113,7 @@ public class Manager : MonoBehaviour
 							linearCurve.Evaluate(musicTimerScript.Progress())
 						);
 				}
-				if (musicTimerPhase == 3)
+				else if (musicTimerPhase == 3)
 				{
 					attObject.AttributionObject.position = Vector3.Lerp
 						(
@@ -176,17 +187,9 @@ public class Manager : MonoBehaviour
 
 	public static void PlayMusic(int mID, float mVolume = 1)
 	{
-		mVolume = Mathf.Clamp01(mVolume);
-		mVolume *= instance.globalAudio;
 
 		instance.musicPlaying = true;
 
-		for (int i = 0; i < instance.musicSources.Count; i++)
-		{
-			instance.musicSources[i].volume = 0;
-		}
-		instance.musicSources[mID].volume = mVolume;
-		instance.musicSources[mID].Play();
 		instance.musicidskip = mID;
 
 		instance.attObject.TextAttributionObject.text = instance.musics[mID].musicName;
@@ -201,20 +204,13 @@ public class Manager : MonoBehaviour
 			GameObject newsource = Instantiate(musicSourcePrefab, transform.position, Quaternion.identity, transform);
 			AudioSource audioSource = newsource.GetComponent<AudioSource>();
 			audioSource.clip = musics[i].musicClip;
-
+			audioSource.Play();
+			audioSource.volume = 0;
 			musicSources.Add(audioSource);
 		}
 	}
 
-	public static void AddMonye(int monye)
-	{
-		if (UnityEngine.Random.Range(0, 101) <= 10)
-		{
-			monye += instance.chimataStockManipulation;
-		}
-		instance.playerMoney += monye;
-		instance.moneytext.text = instance.playerMoney.ToString();
-	}
+
 	#endregion
 
 	#region Particle
@@ -227,5 +223,14 @@ public class Manager : MonoBehaviour
 		instance.particleTimers.Add(new TimerScript(mParticleSystem.main.startLifetime.constantMax));
 
 	}
-	#endregion
+    #endregion
+    public static void AddMonye(int monye)
+    {
+        if (UnityEngine.Random.Range(0, 101) <= 10)
+        {
+            monye += monye * instance.chimataStockManipulation;
+        }
+        instance.playerMoney += monye;
+        instance.moneytext.text = instance.playerMoney.ToString();
+    }
 }

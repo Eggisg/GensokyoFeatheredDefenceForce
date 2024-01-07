@@ -14,8 +14,8 @@ public class MusicShowcaseObjects : MonoBehaviour
     {
         AttributionObject.position = offScreenPoint.position;
     }
-    public void DebugButton()
+    public void DebugButton(int id)
     {
-        Manager.PlayMusic(3, 1);
+        Manager.PlayMusic(id, 1);
     }
 }

@@ -16,10 +16,11 @@ public class BirbInfo : ScriptableObject
     public float damage;
     public int cost;
     public float specialFloat;
-    public float aoeSize;
 
+    public Sprite image;
     public EnemyStatus status;
     public GameObject throwablePrefab;
+
 
     public void Initialize()
     {
@@ -32,29 +33,29 @@ public class BirbInfo : ScriptableObject
     }
     public void Upgrade()
     {
-        //if enough money and not max tier
-        currentTier += 1;
-        //switch (currentTier) // ??? Why the switch
-        //{
-        //    case 1:
-        //        StatUpdate(1);
-        //    break;
+        if (Manager.instance.playerMoney >= cost && currentTier !>= 3)
+        {
+            currentTier += 1;
+            switch (currentTier) // ??? Why the switch
+            { //because im a lil bitch das why
+                case 1:
+                    StatUpdate(1);
+                    break;
 
-        //    case 2:
-        //        StatUpdate(2);
-        //    break;
+                case 2:
+                    StatUpdate(2);
+                    break;
 
-        //    case 3:
-        //        StatUpdate(3);
-        //    break;
+                case 3:
+                    StatUpdate(3);
+                    break;
 
-        //    default:
-        //        StatUpdate(0);
-        //    break;
-
-        //}
-
-        StatUpdate(currentTier);
+                default:
+                    StatUpdate(0);
+                    break;
+            }
+        }
+        //StatUpdate(currentTier);
     }
 
     public void StatUpdate(int tier)
@@ -63,7 +64,6 @@ public class BirbInfo : ScriptableObject
         damage = tiers[tier].damage;
         cost = tiers[tier].cost;
         specialFloat = tiers[tier].specialFloat;
-        aoeSize = tiers[tier].aoeSize;
     }
 
 

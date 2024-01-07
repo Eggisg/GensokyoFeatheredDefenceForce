@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79746f4a7087cab4fa6f6c4c254b5fb8, type: 3}
+  m_Name: ElisioTrack2
+  m_EditorClassIdentifier: 
+  musicName: GettingSidetracked_Final
+  musicClip: {fileID: 8300000, guid: f704685a16fe2bb499c1c1d5818bac45, type: 3}

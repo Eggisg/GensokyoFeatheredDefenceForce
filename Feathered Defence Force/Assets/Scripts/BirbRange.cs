@@ -6,6 +6,12 @@ public class BirbRange : MonoBehaviour
 {
     
     public GenericBirbTower birbtower;
+    public bool showCollider;
+    public GameObject birbthic;
+    private void Update()
+    {
+        birbthic.SetActive(showCollider);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collission");
