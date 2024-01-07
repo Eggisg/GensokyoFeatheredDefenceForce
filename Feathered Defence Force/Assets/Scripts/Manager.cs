@@ -26,9 +26,9 @@ public class Manager : MonoBehaviour
 
     #region audio
     [Header("Audio")]
-    public float globalAudio;
-    public float globalMusic;
-    public float globalMisc;
+    public static float globalAudio;
+    public static float globalMusic;
+    public static float globalMisc;
 
 
     public List<AudioClip> audios;
@@ -164,7 +164,7 @@ public class Manager : MonoBehaviour
     public static void PlayAudio(int mID, float volume = 1)
     {
         volume = Mathf.Clamp01(volume);
-        volume *= instance.globalAudio * instance.globalMisc;
+        volume *= globalAudio * globalMisc;
         GameObject mGameObject = Instantiate(instance.audioSourcePreFab, instance.transform.position, Quaternion.identity, instance.transform);
         AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
 
@@ -185,7 +185,7 @@ public class Manager : MonoBehaviour
     public static void PlayAudio(AudioClip clip, float volume = 1)
     {
         volume = Mathf.Clamp(volume, 0, 1);
-        volume *= instance.globalAudio * instance.globalMisc;
+        volume *= globalAudio * globalMisc;
         GameObject mGameObject = Instantiate(instance.audioSourcePreFab, instance.transform.position, Quaternion.identity, instance.transform);
         AudioSource mAudioSource = mGameObject.GetComponent<AudioSource>();
 
