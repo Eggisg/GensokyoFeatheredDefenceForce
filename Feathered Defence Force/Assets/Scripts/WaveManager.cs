@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using TMPro;
 using TMPro.Examples;
 using UnityEngine;
 
@@ -12,6 +14,9 @@ public class WaveManager : MonoBehaviour
     public List<GameObject> enemyPrefabs;
     public List<GameObject> bossesPrefabs;
     public GameObject nextwaveButton;
+    public TextMeshProUGUI enemiesText;
+    public GameObject enemyContainer;
+    public float multiplierspeed;
 
     [SerializeField] private List<NewEnemy> enemies = new List<NewEnemy>();
     [SerializeField] private List<NewEnemy> bossList = new List<NewEnemy>();
@@ -31,6 +36,15 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKey(KeyCode.G)) 
+        {
+            multiplierspeed = 0.3f;
+        }
+        else
+        {
+            multiplierspeed = 1f;
+        }
+
         if (debug)
         {
             StartSpawning();
@@ -39,12 +53,14 @@ public class WaveManager : MonoBehaviour
 
         if (waveactive)
         {
+            enemiesText.text = $"Enemies - {GetRemainingEnemyCount()}";
+
             if (spawning)
             {
                 timer.Update();
                 if (timer.Check())
                 {
-                    timer.Start(delay);
+                    timer.Start(delay * multiplierspeed);
 
                     if (spawnedEnemies < proportioned.Count)
                     {
@@ -57,15 +73,11 @@ public class WaveManager : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (IsProportionedListEmpty())
             {
-                
-                if (IsProportionedListEmpty())
-                {
-                    waveactive = false;
-                    Manager.PlayMusic(3);
-                    nextwaveButton.SetActive(true);
-                }
+                waveactive = false;
+                Manager.PlayMusic(3);
+                nextwaveButton.SetActive(true);
             }
         }
     }
@@ -81,7 +93,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < wave.enemies; i++)
         {
             randomInt = random.Next(enemyPrefabs.Count);
-            NewEnemy enemy = Instantiate(enemyPrefabs[randomInt]).GetComponent<NewEnemy>();
+            NewEnemy enemy = Instantiate(enemyPrefabs[randomInt], enemyContainer.transform).GetComponent<NewEnemy>();
             enemy.gameObject.SetActive(false);  // Set the initial state to inactive
             enemies.Add(enemy);
         }
@@ -89,7 +101,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < wave.bosses; i++)
         {
             randomInt = random.Next(bossesPrefabs.Count);
-            NewEnemy boss = Instantiate(bossesPrefabs[randomInt]).GetComponent<NewEnemy>();
+            NewEnemy boss = Instantiate(bossesPrefabs[randomInt], enemyContainer.transform).GetComponent<NewEnemy>();
             boss.gameObject.SetActive(false);  // Set the initial state to inactive
             bossList.Add(boss);
         }
@@ -139,6 +151,8 @@ public class WaveManager : MonoBehaviour
         spawning = true;
         waveactive = true;
         nextwaveButton.SetActive(true);
+        Destroy(enemyContainer);
+        enemyContainer = new GameObject();
         RandomizeList();
         RunProportionalInstantiation();
         UpdateEnemyBossCounts(waveIndex);
@@ -165,5 +179,19 @@ public class WaveManager : MonoBehaviour
         }
 
         return true; // All items are null, list is empty
+    }
+    public int GetRemainingEnemyCount()
+    {
+        int count = 0;
+
+        foreach (var enemy in proportioned)
+        {
+            if (enemy != null)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 }

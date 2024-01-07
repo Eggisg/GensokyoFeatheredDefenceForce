@@ -24,7 +24,7 @@ public class BirbInfo : ScriptableObject
 
     public void Initialize()
     {
-        if (tiers.Length > 0)
+        if (tiers.Length > 0 && tiers[0] != null)
         {
             StatUpdate(0);
         }

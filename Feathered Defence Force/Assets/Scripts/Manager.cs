@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Manager : MonoBehaviour
     public AnimationCurve curve;
     public AnimationCurve linearCurve;
     public AnimationCurve pickupCurve;
+
+    public List<GameObject> objectsToDisableOnDeath;
+    public GameObject objectToEnableOnDeath;
 
     #region audio
     [Header("Audio")]
@@ -253,6 +257,24 @@ public class Manager : MonoBehaviour
     public static void RemoveHealth(int health)
     {
         instance.health -= health;
+        if (instance.health < 0)
+        {
+            instance.Death();
+        }
         instance.healthtext.text = $"{instance.health} X";
+    }
+
+    private void Death()
+    {
+        foreach (GameObject obj in objectsToDisableOnDeath)
+        {
+            obj.SetActive(false);
+        }
+        objectToEnableOnDeath.SetActive(true);
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(1);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,7 +10,9 @@ public class StorePanel : MonoBehaviour
 {
 
     public GameObject birbPrefab;
-    public BirbInfo birbInfo;
+    public GenericBirbTower birbInfoObject;
+    BirbInfo birbInfo;
+
     public Image spriteimage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI costText;
@@ -21,10 +24,10 @@ public class StorePanel : MonoBehaviour
 
     void Start()
     {
-
+        birbInfo = birbPrefab.GetComponent<GenericBirbTower>().birbInfo;
         birbInfo = Instantiate(birbPrefab.GetComponent<GenericBirbTower>().birbInfo);
         birbInfo.Initialize();
-        nameText.text = birbInfo.name;
+        nameText.text = birbInfo.birbname;
         costText.text = birbInfo.cost.ToString();
         spriteimage.sprite = birbInfo.image;
     }

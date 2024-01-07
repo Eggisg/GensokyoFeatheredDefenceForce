@@ -22,6 +22,7 @@ public class GenericBirbTower : CommonInheritor
         Debug.Log(birbInfo.speed);
         pTimerScript = new TimerScript(birbInfo.speed);
         birbInfo = Instantiate(birbInfo);
+        GetComponentInChildren<SpriteRenderer>().sprite = birbInfo.image;
     }
 
     internal virtual void Update()

@@ -11,6 +11,8 @@ public class StoreManager : MonoBehaviour
     public bool placingtower = false;
     public bool placingtower2 = false;
     public GameObject placingText;
+    public float panelscale;
+    
 
     public static StoreManager instance;
 
@@ -48,13 +50,15 @@ public class StoreManager : MonoBehaviour
         for (int i = 0; i < birbPrefabs.Count; i++)
         {
             int row = i / columnsAndRows.x;
-            int col = i % columnsAndRows.y;
+            int col = i % columnsAndRows.x;
 
             Debug.Log($"{i} {col * prefabOffsets.x} {row * -prefabOffsets.y}");
 
             Vector3 newPos = new Vector3(col * prefabOffsets.x, row * -prefabOffsets.y, 0f);
             newPos += firstSpot.position;
-            Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
+            GameObject panel = Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
+            panel.transform.localScale = new Vector3(panelscale, panelscale, panelscale);
+
         }
     }
 
