@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b551f63b447b17249b1d96d1850ab6c2, type: 3}
-  m_Name: Chen
+  m_Script: {fileID: 11500000, guid: 03044763cfda9344983ed60c0dc368af, type: 3}
+  m_Name: wave
   m_EditorClassIdentifier: 
-  boss: 1
-  hp: 12
-  damage: 0
-  speed: 0.8
-  maxReward: 12
-  minReward: 12
-  sprite: {fileID: 21300000, guid: 4c02a22f9e8b49b41affef91659d70bb, type: 3}
+  enemies: 4
+  bosses: 0

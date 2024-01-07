@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 143494047567057318}
   - component: {fileID: 143494047567057317}
   m_Layer: 0
-  m_Name: enemyReal
+  m_Name: Inchling
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,7 +560,8 @@ MonoBehaviour:
   currentWaypoint: 0
   speed: 1
   health: 30
-  enemyinfo: {fileID: 11400000, guid: 03ab8b4d6f2938a4aa1b8b0c0a3f8962, type: 2}
+  enemyinfo: {fileID: 11400000, guid: 58a1ec7e031ec5e4899bc0b0c9daa3fd, type: 2}
+  distance: 0
   fireMultiplier: 0
   onFire: 0
   fireVisual: {fileID: 143494046063749143}

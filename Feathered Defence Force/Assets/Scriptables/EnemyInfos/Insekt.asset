@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b551f63b447b17249b1d96d1850ab6c2, type: 3}
   m_Name: Insekt
   m_EditorClassIdentifier: 
-  boss: 1
-  hp: 10
-  damage: 0
+  boss: 0
+  hp: 5
+  damage: 1
   speed: 1
-  reward: 5
-  sprite: {fileID: 21300000, guid: bdd16a6f69d67e84394148518a52ab38, type: 3}
+  maxReward: 3
+  minReward: 3
+  sprite: {fileID: 21300000, guid: cdc15d20bb1333c4da217a1c04f6b43b, type: 3}

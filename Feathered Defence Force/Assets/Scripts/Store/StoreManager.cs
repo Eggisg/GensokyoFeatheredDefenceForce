@@ -28,6 +28,7 @@ public class StoreManager : MonoBehaviour
     public RectTransform firstSpot;
     public Vector2Int columnsAndRows;
     public KeyCode placeKey;
+    public int cost;
 
 
 
@@ -115,8 +116,9 @@ public class StoreManager : MonoBehaviour
         Debug.Log("Store is closed?!? How am I to buy my Touhou themed blowjob now...");
     }
 
-    public void StartPlacingTower(GameObject prefab)
+    public void StartPlacingTower(GameObject prefab, int cost)
     {
+        this.cost = cost;
         openedStore.SetActive(false);
         closedStore.SetActive(false);
         buyingBirb.SetActive(false);
@@ -150,7 +152,12 @@ public class StoreManager : MonoBehaviour
         placingtower2 = true;
         //press E to change placement
         buyingBirb.SetActive(true);
+        
     }
+
+
+
+
 
 
     public void CancelPurchase()
@@ -160,6 +167,7 @@ public class StoreManager : MonoBehaviour
         placingtower2 = false;
         doStore = false;
         buyingBirb.SetActive(false);
+        placingText.SetActive(false);
     }
 
     public void ConfirmBuy()
@@ -168,11 +176,12 @@ public class StoreManager : MonoBehaviour
         doStore = false;
         newBirb.GetComponent<GenericBirbTower>().PlaceTower();
         Birbthicc.showCollider = false;
-
+        Manager.AddMonye(-cost);
         newBirb = null;
         placingtower = false;
         placingtower2 = false;
         buyingBirb.SetActive(false);
+        placingText.SetActive(false);
 
     }
 

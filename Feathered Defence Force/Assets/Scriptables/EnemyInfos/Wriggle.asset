@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Wriggle
   m_EditorClassIdentifier: 
   boss: 1
-  hp: 10
+  hp: 12
   damage: 0
-  speed: 1
-  reward: 5
-  sprite: {fileID: 21300000, guid: bdd16a6f69d67e84394148518a52ab38, type: 3}
+  speed: 0.8
+  maxReward: 12
+  minReward: 12
+  sprite: {fileID: 21300000, guid: f8bf3750a770ad842b75cec7630f473d, type: 3}

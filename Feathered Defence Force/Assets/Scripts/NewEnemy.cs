@@ -65,6 +65,14 @@ public class NewEnemy : CommonInheritor
         sprite = transform.GetChild(0);
 
         spriteRenderer.sprite = enemyinfo.sprite;
+        if (enemyinfo.boss)
+        {
+            spriteRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else
+        {
+            spriteRenderer.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        }
         health = enemyinfo.hp;
         speed = enemyinfo.speed;
 
@@ -108,14 +116,13 @@ public class NewEnemy : CommonInheritor
 
         if (currentWaypoint >= waypoints.Count)
         {
-            // hurt by enemyinfo.damage
-            Destroy(gameObject);
+            ReachedEnd();
         }
         else
         {
             if (active && waypoints.Count > 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * WaveManager.speedboost * Time.deltaTime);
                 distance = Vector3.Distance(transform.position, waypoints[currentWaypoint].position) + currentWaypoint * -100;
             }
             if (active && transform.position == waypoints[currentWaypoint]!.position)
@@ -170,6 +177,7 @@ public class NewEnemy : CommonInheritor
         {
             Manager.PlayAudio(11, 0.7f);
         }
+        Manager.AddMonye((int)enemyinfo.minReward);
 
         //drop monye
         Destroy(gameObject);
@@ -208,6 +216,21 @@ public class NewEnemy : CommonInheritor
         }
 
         return onFire;
+    }
+
+    private void ReachedEnd()
+    {
+        Manager.PlayAudio(12);
+        if (enemyinfo.boss)
+        {
+            Manager.RemoveHealth(5);
+        }
+        else
+        {
+            Manager.RemoveHealth(5);
+        }
+        
+        Destroy(gameObject);
     }
 
 }

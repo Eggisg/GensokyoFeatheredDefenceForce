@@ -71,7 +71,7 @@ public class Infopanel : MonoBehaviour
     {
         if (canBuy)
         {
-            storeManager.StartPlacingTower(prefab);
+            storeManager.StartPlacingTower(prefab, birbInfo.cost);
 
         }
     }
