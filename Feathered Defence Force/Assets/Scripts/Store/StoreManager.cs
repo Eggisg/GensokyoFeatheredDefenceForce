@@ -99,7 +99,7 @@ public class StoreManager : MonoBehaviour
             }
 
             newBirb.transform.position = cursor.position;
-            if (Input.GetKey(placeKey) && newBirb.GetComponent<GenericBirbTower>().canPlace)
+            if ((Input.GetKey(placeKey) || Input.GetMouseButtonDown(0)) && newBirb.GetComponent<GenericBirbTower>().canPlace)
             {
                 purchaseButton.SetActive(true);
                 buyingBirb.SetActive(true);
@@ -168,6 +168,7 @@ public class StoreManager : MonoBehaviour
         Birbthicc.showCollider = true;
 
         newBirb = Instantiate(prefab, CursorScript.instance.transform.position, Quaternion.identity);
+        newBirb.GetComponent<GenericBirbTower>().active = false;
         newBirb.GetComponentInChildren<BirbRange>().showCollider = true;
     }
     public void StartPlacingTower()
@@ -188,7 +189,6 @@ public class StoreManager : MonoBehaviour
         placingtower = false;
         placingtower2 = true;
         //press E to change placement
-        buyingBirb.SetActive(true);
         
     }
 
@@ -208,8 +208,11 @@ public class StoreManager : MonoBehaviour
         doStore = false;
         newBirb.GetComponent<GenericBirbTower>().PlaceTower();
         Birbthicc.showCollider = false;
+
         Manager.AddMonye(-cost);
+        newBirb.GetComponent<GenericBirbTower>().active = true;
         newBirb = null;
+
         placingtower = false;
         placingtower2 = false;
         buyingBirb.SetActive(false);

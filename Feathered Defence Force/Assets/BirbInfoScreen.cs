@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +10,11 @@ public class BirbInfoScreen : MonoBehaviour
     [HideInInspector] public GenericBirbTower birbScript;
     public Image birbImage;
     public Image[] buttons = new Image[4];
+
+    public TextMeshProUGUI birbname;
+    public TextMeshProUGUI birbdescription;
+    public TextMeshProUGUI birbspeed;
+    public TextMeshProUGUI birbattack;
 
     public void StartMenu(GameObject birb, GenericBirbTower birbScript)
     {
@@ -32,6 +37,11 @@ public class BirbInfoScreen : MonoBehaviour
             }
         }
         birbImage.sprite = birbScript.birbInfo.image;
+
+        birbname.text = birbScript.birbInfo.birbname;
+        birbdescription.text = birbScript.birbInfo.desc;
+        birbattack.text = birbScript.birbInfo.damage.ToString();
+        birbspeed.text = birbScript.birbInfo.speed.ToString();
     }
 
     public void ChangeAttackMode(int mode)

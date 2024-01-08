@@ -38,7 +38,7 @@ public class GenericBirbTower : CommonInheritor
     {
         if (active)
         {
-            if (mouseHovering && Input.GetMouseButtonDown(1) && birbmenu == null)
+            if (mouseHovering && Input.GetMouseButtonDown(1) && birbmenu == null && !StoreManager.instance.placingtower && !StoreManager.instance.placingtower2)
             {
                 birbmenu = Instantiate(birbMenuPrefab, transform);
                 birbmenu.GetComponentInChildren<BirbInfoScreen>().StartMenu(gameObject, this);

@@ -2815,6 +2815,10 @@ MonoBehaviour:
   - {fileID: 4625005919274250271}
   - {fileID: 4625005918927116142}
   - {fileID: 4625005919626296431}
+  birbname: {fileID: 4625005918967985448}
+  birbdescription: {fileID: 4625005919659827362}
+  birbspeed: {fileID: 4625005918905999250}
+  birbattack: {fileID: 4625005919057923130}
 --- !u!1 &4625005920907303050
 GameObject:
   m_ObjectHideFlags: 0

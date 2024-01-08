@@ -11,17 +11,13 @@ public class ResolutionFixer : MonoBehaviour
     private void Start()
     {
         // Call the method once at the beginning to set the initial resolution
-        AdjustResolution();
+        Screen.SetResolution(1920, 1080, Screen.fullScreen); //suck shit other resolution people, you dont exist
+        Screen.fullScreen = true;
     }
 
     private void Update()
     {
-        // Check for changes in focus or pause status
-        if (Application.isFocused)
-        {
-            // Call the method to adjust the resolution
-            AdjustResolution();
-        }
+
     }
     private void AdjustResolution()
     {
@@ -37,5 +33,6 @@ public class ResolutionFixer : MonoBehaviour
             // Set the new resolution
             Screen.SetResolution(newWidth, Screen.height, Screen.fullScreen);
         }
+        
     }
 }

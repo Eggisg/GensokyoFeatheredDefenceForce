@@ -82,9 +82,9 @@ public class Manager : MonoBehaviour
     void Update()
     {
         //fnaf troll frfr
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu.SetActive(true);
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
         }
 
 
