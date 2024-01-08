@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5aca588c4506cd1438c163f1a9d8b983
+guid: 4eb2af5ed2cfba1468063bd18f48b8d8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,94 +115,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Tilemap_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64f4a5953931dcc4ebbdd4dbb00d6719
-      internalID: -62233328
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 224
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49e17a91c2f191749adf0228d219d0e2
-      internalID: -1836952320
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 475a10d933e6aa94a8043c56322e2ed3
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Tilemap_9: 1483601915
-      Tilemap_6: 635950540
-      Tilemap_19: -851310435
-      Tilemap_4: -48548576
-      Tilemap_7: 710417288
-      Tilemap_15: -28168196
-      Tilemap_22: 1298951435
-      Tilemap_17: -1873807666
-      Tilemap_3: 1507400413
-      Tilemap_24: -117606244
-      Tilemap_25: 2083677966
-      Tilemap_21: -1266814027
-      Tilemap_28: 2091072342
-      Tilemap_2: -1404483700
-      Tilemap_29: 1353842801
-      Tilemap_31: -900012924
-      Tilemap_16: 1728976085
-      Tilemap_10: 1250923191
-      Tilemap_12: 1057565256
-      Tilemap_26: 1436007635
-      Tilemap_30: -1257002378
-      Tilemap_20: -1333991105
-      Tilemap_11: -1320999303
-      Tilemap_27: 83395607
-      Tilemap_14: -345191555
-      Tilemap_33: 1444938501
-      Tilemap_8: -1050539766
-      Tilemap_0: -62233328
-      Tilemap_1: -1836952320
-      Tilemap_5: 1573584250
-      Tilemap_13: 669069403
-      Tilemap_32: -152679227
-      Tilemap_18: 2066114891
-      Tilemap_23: 1122077584
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

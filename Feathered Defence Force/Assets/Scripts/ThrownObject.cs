@@ -27,7 +27,7 @@ public class ThrownObject : MonoBehaviour
         {
             if(OriginTower.targets.Count > 0)
             {
-                target = OriginTower.Targeting(OriginTower.targetID);
+                target = OriginTower.Targeting();
             }
             else
             {

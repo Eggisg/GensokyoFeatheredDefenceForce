@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5672511074103512152
 Transform:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.6226415, g: 0, b: 0, a: 0.39607844}
   m_FlipX: 0
@@ -275,7 +275,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5672511074953985835}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -398,7 +398,7 @@ Transform:
   m_GameObject: {fileID: 5672511075506948016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.32, y: 2.32, z: 2.32}
+  m_LocalScale: {x: 1.581776, y: 1.581776, z: 1.581776}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5672511074185367466}
@@ -435,7 +435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   birbtower: {fileID: 5672511075627013294}
   birbthic: {fileID: 5672511074185367461}
-  buh: 0
   colliders: []
 --- !u!50 &1193965974634482718
 Rigidbody2D:
@@ -507,13 +506,17 @@ MonoBehaviour:
   friendlyFire: 0
   active: 1
   audioOn: 0
-  birbInfo: {fileID: 0}
-  targets: []
   canShoot: 0
-  status: {fileID: 0}
   targetID: 0
   canPlace: 0
+  mouseHovering: 0
+  birbSprite: {fileID: 5672511075354163836}
+  birbMenuPrefab: {fileID: 4625005919628942058, guid: a66426abca95ec84694eae99ac282100, type: 3}
   range: {fileID: 5672511075844998804}
+  birbInfo: {fileID: 0}
+  status: {fileID: 0}
+  targets: []
+  movingBirb: 0
 --- !u!1 &5672511075666941578
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5672511075666941579
 Transform:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class Manager : MonoBehaviour
     public List<GameObject> objectsToDisableOnDeath;
     public GameObject objectToEnableOnDeath;
 
+    public GameObject pauseMenu;
+
     #region misc
     public float bossSize, enemySize;
     #endregion
@@ -82,7 +84,7 @@ public class Manager : MonoBehaviour
         //fnaf troll frfr
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            pauseMenu.SetActive(true);
         }
 
 
@@ -167,6 +169,11 @@ public class Manager : MonoBehaviour
             }
         }
         #endregion
+    }
+
+    private void ToggleMenu()
+    {
+
     }
 
     #region audio

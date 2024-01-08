@@ -8,11 +8,9 @@ public class Birbthicc : MonoBehaviour
     public GenericBirbTower birbtower;
     public GameObject birbthic;
     public static bool showCollider;
-    public bool buh;
 
     private void Update()
     {
-        buh = showCollider;
         birbthic.SetActive(showCollider);
 
         if (colliders.Count == 0)
@@ -32,6 +30,11 @@ public class Birbthicc : MonoBehaviour
         {
             colliders.Add(collision);
         }
+        if (collision.gameObject.CompareTag("cursor"))
+        {
+            birbtower.mouseHovering = true;
+        }
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -39,6 +42,10 @@ public class Birbthicc : MonoBehaviour
         if (collision.gameObject.CompareTag(gameObject.tag))
         {
             colliders.Remove(collision);
+        }
+        if (collision.gameObject.CompareTag("cursor"))
+        {
+            birbtower.mouseHovering = false;
         }
     }
 }

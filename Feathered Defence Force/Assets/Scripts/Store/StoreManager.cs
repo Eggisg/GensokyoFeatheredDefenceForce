@@ -85,13 +85,25 @@ public class StoreManager : MonoBehaviour
 
     public void Update()
     {
+        
         if (placingtower)
         {
+            GenericBirbTower birbtowerScript = newBirb.GetComponent<GenericBirbTower>();
+            if (birbtowerScript.canPlace)
+            {
+                birbtowerScript.birbSprite.color = Color.green;
+            }
+            else
+            {
+                birbtowerScript.birbSprite.color = Color.red;
+            }
+
             newBirb.transform.position = cursor.position;
             if (Input.GetKey(placeKey) && newBirb.GetComponent<GenericBirbTower>().canPlace)
             {
                 purchaseButton.SetActive(true);
                 buyingBirb.SetActive(true);
+                birbtowerScript.birbSprite.color = Color.white;
                 placingtower = false;
                 placingtower2 = true;
             }
@@ -138,7 +150,7 @@ public class StoreManager : MonoBehaviour
     {
         closedStore.SetActive(true);
         openedStore.SetActive(false);
-        Debug.Log("Store is closed?!? How am I to buy my Touhou themed blowjob now...");
+        //Debug.Log("Store is closed?!? How am I to buy my Touhou themed blowjob now..."); //you will never get it now
     }
 
     public void StartPlacingTower(GameObject prefab, int cost)
