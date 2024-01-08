@@ -28,6 +28,12 @@ public class WaveManager : MonoBehaviour
     bool waveactive = true;
     public bool debug = false;
 
+    WaveManager instance;
+
+    private void Awake()
+    {
+        instance = this;        
+    }
     private void Start()
     {
         wave = Instantiate(wave);
