@@ -36,14 +36,6 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.G)) 
-        {
-            multiplierspeed = 0.3f;
-        }
-        else
-        {
-            multiplierspeed = 1f;
-        }
 
         if (debug)
         {

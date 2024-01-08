@@ -755,7 +755,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Controls
 
-    G - SpeedUp
+    G - 3x Speed
 
     LMB/E - PlaceBirb
 
