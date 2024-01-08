@@ -18,7 +18,8 @@ public class StoreManager : MonoBehaviour
 
 
     public Transform cursor;
-    public List<GameObject> birbPrefabs;
+    //public List<GameObject> birbPanelPrefabs;
+    public GameObject basePanel;
     public GameObject closedStore;
     public GameObject openedStore;
     public GameObject buyingBirb;
@@ -47,18 +48,38 @@ public class StoreManager : MonoBehaviour
         //	Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
         //}
 
-        for (int i = 0; i < birbPrefabs.Count; i++)
+        //for (int i = 0; i < birbPanelPrefabs.Count; i++)
+        //{
+        //    int row = i / columnsAndRows.x;
+        //    int col = i % columnsAndRows.x;
+
+        //    Vector3 newPos = new Vector3(col * prefabOffsets.x, row * -prefabOffsets.y, 0f);
+        //    newPos += firstSpot.position;
+        //    GameObject panel = Instantiate(birbPanelPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
+        //    panel.transform.localScale = new Vector3(panelscale, panelscale, panelscale);
+
+
+        //}
+    }
+
+    public void CreatePanels(List<GameObject> birbPrefabList)
+    {
+        Debug.Log($"creating birb store panels {birbPrefabList.Count}");
+        for (int i = 0; i < birbPrefabList.Count; i++)
         {
             int row = i / columnsAndRows.x;
             int col = i % columnsAndRows.x;
 
-            Debug.Log($"{i} {col * prefabOffsets.x} {row * -prefabOffsets.y}");
-
             Vector3 newPos = new Vector3(col * prefabOffsets.x, row * -prefabOffsets.y, 0f);
             newPos += firstSpot.position;
-            GameObject panel = Instantiate(birbPrefabs[i], newPos, Quaternion.identity, openedStore.transform);
-            panel.transform.localScale = new Vector3(panelscale, panelscale, panelscale);
+            GameObject panelObject = Instantiate(basePanel, newPos, Quaternion.identity, openedStore.transform);
+            panelObject.transform.localScale = new Vector3(panelscale, panelscale, panelscale);
+            StorePanel panelScript = panelObject.GetComponent<StorePanel>();
+            panelScript.birbPrefab = birbPrefabList[i];
+            
+            panelScript.InstantiateInformation();
 
+            
         }
     }
 

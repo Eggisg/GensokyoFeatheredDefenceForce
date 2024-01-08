@@ -9,23 +9,29 @@ using UnityEngine.UI;
 public class StorePanel : MonoBehaviour
 {
 
-    public GameObject birbPrefab;
-    public GenericBirbTower birbInfoObject;
-    BirbInfo birbInfo;
+    [HideInInspector] public GameObject birbPrefab;
+    [HideInInspector] public GenericBirbTower birbInfoObject;
+    private BirbInfo birbInfo;
 
     public Image spriteimage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI costText;
 
-    private void Awake()
-    {
-        
-    }
 
-    void Start()
+    //void Start()
+    //{
+    //    birbInfo = birbPrefab.GetComponent<GenericBirbTower>().birbInfo;
+    //    birbInfo = Instantiate(birbPrefab.GetComponent<GenericBirbTower>().birbInfo);
+    //    birbInfo.Initialize();
+    //    nameText.text = birbInfo.birbname;
+    //    costText.text = birbInfo.cost.ToString();
+    //    spriteimage.sprite = birbInfo.image;
+    //}
+
+    public void InstantiateInformation()
     {
         birbInfo = birbPrefab.GetComponent<GenericBirbTower>().birbInfo;
-        birbInfo = Instantiate(birbPrefab.GetComponent<GenericBirbTower>().birbInfo);
+        birbInfo = Instantiate(birbInfo);
         birbInfo.Initialize();
         nameText.text = birbInfo.birbname;
         costText.text = birbInfo.cost.ToString();

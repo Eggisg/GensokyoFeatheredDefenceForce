@@ -15,12 +15,17 @@ public class Manager : MonoBehaviour
     public TextMeshProUGUI moneytext;
     public TextMeshProUGUI healthtext;
     public List<Transform> waypoints;
+    public List<GameObject> birbPrefabs;
     public AnimationCurve curve;
     public AnimationCurve linearCurve;
     public AnimationCurve pickupCurve;
 
     public List<GameObject> objectsToDisableOnDeath;
     public GameObject objectToEnableOnDeath;
+
+    #region misc
+    public float bossSize, enemySize;
+    #endregion
 
     #region audio
     [Header("Audio")]
@@ -55,9 +60,7 @@ public class Manager : MonoBehaviour
     public List<TimerScript> particleTimers;
     #endregion
 
-    #region misc
-    public float bossSize, enemySize;
-    #endregion
+
 
     private void Awake()
     {
@@ -71,6 +74,7 @@ public class Manager : MonoBehaviour
         InstanstiateMusic();
         AddMonye(20);
         RemoveHealth(-100);
+        StoreManager.instance.CreatePanels(birbPrefabs);
     }
 
     void Update()

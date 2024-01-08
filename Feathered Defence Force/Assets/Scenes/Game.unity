@@ -2235,14 +2235,7 @@ MonoBehaviour:
   placingText: {fileID: 1562704369}
   panelscale: 2
   cursor: {fileID: 19253468}
-  birbPrefabs:
-  - {fileID: 7009906235586633538, guid: 1a309e2a50914eb459c51f39073b956a, type: 3}
-  - {fileID: 7009906235586633538, guid: 80fffac93baf8b942b27a17d51545268, type: 3}
-  - {fileID: 7009906235586633538, guid: 5175d86c95d9c3543b3127059d487370, type: 3}
-  - {fileID: 7009906235586633538, guid: be9adede06b3f3d41bc86030eb9f6a2b, type: 3}
-  - {fileID: 7009906235586633538, guid: 2eafd94ac9507e14ab1df151cb6bc4f3, type: 3}
-  - {fileID: 7009906235586633538, guid: 21b2302f843771d46bd1e8196f723d33, type: 3}
-  - {fileID: 7009906235586633538, guid: 4fa09ccf31b3a9c44ac53a0212f17041, type: 3}
+  basePanel: {fileID: 7009906235586633538, guid: 1207a19357e1db24c89142f2f25f4019, type: 3}
   closedStore: {fileID: 570669937}
   openedStore: {fileID: 1275582887}
   buyingBirb: {fileID: 1431502602}
@@ -5925,6 +5918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1242614145}
+  - component: {fileID: 1242614146}
   m_Layer: 0
   m_Name: Importante
   m_TagString: Untagged
@@ -5952,6 +5946,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1242614146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242614144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e98d0ef612ab134aba9780fcf7083c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1243506645
 GameObject:
   m_ObjectHideFlags: 0
@@ -12831,6 +12837,13 @@ MonoBehaviour:
   - {fileID: 1646779899}
   - {fileID: 165002780}
   - {fileID: 1718570464}
+  birbPrefabs:
+  - {fileID: 1420868369881061165, guid: b4155df2ff7bb0f41872514bd748a588, type: 3}
+  - {fileID: 1420868369881061165, guid: 846a827b58c9fe24795cdb9a8f145b34, type: 3}
+  - {fileID: 1420868369881061165, guid: f7a49d19c5bc6164f96b6d54b24f73f0, type: 3}
+  - {fileID: 1420868369881061165, guid: 139d1afbce4da5f4c92fd8b81cc7216b, type: 3}
+  - {fileID: 1420868369881061165, guid: 5415536d1500f304184a91960e180f49, type: 3}
+  - {fileID: 1420868369881061165, guid: a90888bc367439446b8fedbfc8629e2f, type: 3}
   curve:
     serializedVersion: 2
     m_Curve:
@@ -12925,9 +12938,8 @@ MonoBehaviour:
   - {fileID: 430828836}
   - {fileID: 1027189836}
   objectToEnableOnDeath: {fileID: 1641172438}
-  globalAudio: 1
-  globalMusic: 1
-  globalMisc: 0.5
+  bossSize: 1
+  enemySize: 0.6
   audios:
   - {fileID: 8300000, guid: 855a5e03fb59af74d9688ec93901eed7, type: 3}
   - {fileID: 8300000, guid: 08f5808a07308b04fac60a40b7c9d82e, type: 3}
@@ -12975,8 +12987,6 @@ MonoBehaviour:
   - {fileID: 6107169019271298376, guid: 0430fa1ce1d3f4e45a898d63045bbb86, type: 3}
   particleSystems: []
   particleTimers: []
-  bossSize: 1
-  enemySize: 0.6
 --- !u!1 &2016131081
 GameObject:
   m_ObjectHideFlags: 0
@@ -13885,6 +13895,18 @@ PrefabInstance:
     - target: {fileID: 8980789728513382811, guid: 777d6743f9c541d41b9b9bc39bba2c39, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980789728513382814, guid: 777d6743f9c541d41b9b9bc39bba2c39, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980789728513382814, guid: 777d6743f9c541d41b9b9bc39bba2c39, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980789728513382814, guid: 777d6743f9c541d41b9b9bc39bba2c39, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 777d6743f9c541d41b9b9bc39bba2c39, type: 3}
