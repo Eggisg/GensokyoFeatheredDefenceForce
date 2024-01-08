@@ -8,14 +8,15 @@ public class GenericBirbTower : CommonInheritor
     public bool friendlyFire = false;
     public bool active = false;
     public bool audioOn;
-    private TimerScript pTimerScript;
-    public BirbInfo birbInfo;
-    public List<Transform> targets;
     public bool canShoot;
-    public EnemyStatus status;
     public int targetID;
     public bool canPlace;
+    public SpriteRenderer birbSprite;
     public BirbRange range;
+    public BirbInfo birbInfo;
+    public EnemyStatus status;
+    public List<Transform> targets;
+    private TimerScript pTimerScript;
 
     internal virtual void Start()
     {

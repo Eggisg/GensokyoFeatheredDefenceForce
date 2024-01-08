@@ -11,7 +11,7 @@ public class MenuFuncs : MonoBehaviour
     {
         Application.Quit();
     }
-    public void toggleCredits()
+    public void ToggleCredits()
     {
         if (credits.activeSelf)
         {
@@ -24,8 +24,12 @@ public class MenuFuncs : MonoBehaviour
             menu.SetActive(false);
         }
     }
-    public void StartGame()
+    public void StartGame(int id)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(id);
+    }
+    public void CloseMenu()
+    {
+        this.gameObject.SetActive(false);
     }
 }
