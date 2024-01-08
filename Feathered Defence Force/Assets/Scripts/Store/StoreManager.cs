@@ -64,7 +64,9 @@ public class StoreManager : MonoBehaviour
 
     public void CreatePanels(List<GameObject> birbPrefabList)
     {
-        Debug.Log($"creating birb store panels {birbPrefabList.Count}");
+
+        birbPrefabList.Sort(SortByCost);
+        
         for (int i = 0; i < birbPrefabList.Count; i++)
         {
             int row = i / columnsAndRows.x;
@@ -78,8 +80,6 @@ public class StoreManager : MonoBehaviour
             panelScript.birbPrefab = birbPrefabList[i];
             
             panelScript.InstantiateInformation();
-
-            
         }
     }
 
@@ -180,11 +180,6 @@ public class StoreManager : MonoBehaviour
         
     }
 
-
-
-
-
-
     public void CancelPurchase()
     {
         purchaseButton.SetActive(false);
@@ -208,6 +203,17 @@ public class StoreManager : MonoBehaviour
         buyingBirb.SetActive(false);
         placingText.SetActive(false);
 
+    }
+    public int SortByCost(GameObject birb1, GameObject birb2)
+    {
+        BirbInfo birb1info = birb1.GetComponent<GenericBirbTower>().birbInfo;
+        BirbInfo birb2info = birb2.GetComponent<GenericBirbTower>().birbInfo;
+        birb1info = Instantiate(birb1info);
+        birb1info.Initialize();
+        birb2info = Instantiate(birb2info);
+        birb2info.Initialize();
+
+        return birb1info.cost.CompareTo(birb2info.cost);
     }
 
     /// <summary>

@@ -28,7 +28,7 @@ public class Birbthicc : MonoBehaviour
     public List<Collider2D> colliders;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Tower"))
+        if (collision.gameObject.CompareTag(gameObject.tag))
         {
             colliders.Add(collision);
         }
@@ -36,7 +36,7 @@ public class Birbthicc : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Tower"))
+        if (collision.gameObject.CompareTag(gameObject.tag))
         {
             colliders.Remove(collision);
         }

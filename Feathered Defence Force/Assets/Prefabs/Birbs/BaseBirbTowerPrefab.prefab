@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 1193965974634482718}
   m_Layer: 0
   m_Name: BirbThiccness
-  m_TagString: Tower
+  m_TagString: Unplacable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

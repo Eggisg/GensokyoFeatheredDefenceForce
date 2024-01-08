@@ -9,6 +9,7 @@ TagManager:
   - Tower
   - Enemy
   - Path
+  - Unplacable
   layers:
   - Default
   - TransparentFX
