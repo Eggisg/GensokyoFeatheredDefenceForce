@@ -18,6 +18,7 @@ public class NewEnemy : CommonInheritor
 
     [Header("Fire Related")]
     public float fireMultiplier = 1f;
+    public float freezeMultiplier = 1f;
     public bool onFire;
     public LerpVector3 fireScaleLerper;
     public Transform fireVisual;
@@ -121,7 +122,7 @@ public class NewEnemy : CommonInheritor
         {
             if (active && waypoints.Count > 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * WaveManager.speedboost * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * CalculateFreezeMultiplier() * WaveManager.speedboost * Time.deltaTime);
                 distance = Vector3.Distance(transform.position, waypoints[currentWaypoint].position) + currentWaypoint * -100;
             }
             if (active && transform.position == waypoints[currentWaypoint]!.position)
@@ -198,9 +199,28 @@ public class NewEnemy : CommonInheritor
                 oiled = true;
             }
         }
-
         return fireMultiplier;
     }
+    private float CalculateFreezeMultiplier()
+    {
+        freezeMultiplier = 1f;
+
+        foreach (EnemyStatus status in statuses)
+        {
+            FreezeStatus frozenStatus = status as FreezeStatus;
+
+            if (frozenStatus != null)
+            {
+                freezeMultiplier *= 0.8f;
+            }
+        }
+        if (freezeMultiplier < 0.2f)
+        {
+            freezeMultiplier = 0.2f;
+        }
+        return freezeMultiplier;
+    }
+
     private bool CheckIfOnFire(bool enableVisual = false)
     {
         onFire = false;

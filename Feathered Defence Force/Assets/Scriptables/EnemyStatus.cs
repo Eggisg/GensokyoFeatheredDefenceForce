@@ -8,7 +8,7 @@ public abstract class EnemyStatus : ScriptableObject
     protected TimerScript pTimer = new TimerScript(0); // create timer
     public float duration; // how long until it game ends itself
     private float pTime = 0; //^
-    [SerializeField] public NewEnemy enemy; // the script its attached to
+    [HideInInspector] public NewEnemy enemy; // the script its attached to
     
 
     internal virtual void Instantiate() //called on adding
