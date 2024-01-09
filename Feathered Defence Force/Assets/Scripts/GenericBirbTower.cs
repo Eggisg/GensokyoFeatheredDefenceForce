@@ -145,7 +145,7 @@ public class GenericBirbTower : CommonInheritor
 
     public void PlaceTower()
     {
-        Debug.Log("tf2 sexupdate");
+        //Debug.Log("tf2 sexupdate"); // WHAT (commented to save the ittiest-bittiest bit of perf)
         active = true;
         transform.position = new Vector3(transform.position.x, transform.position.y, 44);
         range.showCollider = false;

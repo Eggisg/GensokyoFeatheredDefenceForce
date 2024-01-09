@@ -40,7 +40,7 @@ public class Infopanel : MonoBehaviour
     }
     public void GiveInfo(BirbInfo newInfo, GameObject prefab)
     {
-        this.prefab = prefab;
+        this.prefab = prefab; // Needed? - Needed.
         birbInfo = newInfo;
         everythingVisual.SetActive(true);
         SetInfo();
@@ -74,5 +74,10 @@ public class Infopanel : MonoBehaviour
             storeManager.StartPlacingTower(prefab, birbInfo.cost);
 
         }
+    }
+
+    public GameObject GetPrefab()
+    {
+        return prefab;
     }
 }   
