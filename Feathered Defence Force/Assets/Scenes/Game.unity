@@ -2336,7 +2336,7 @@ GameObject:
   - component: {fileID: 430828837}
   - component: {fileID: 430828841}
   m_Layer: 5
-  m_Name: BasedCanas
+  m_Name: StoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2454,13 +2454,14 @@ MonoBehaviour:
   basePanel: {fileID: 7009906235586633538, guid: 1207a19357e1db24c89142f2f25f4019, type: 3}
   closedStore: {fileID: 570669937}
   openedStore: {fileID: 1275582887}
-  buyingBirb: {fileID: 1431502602}
+  buyingStore: {fileID: 1431502602}
   purchaseButton: {fileID: 29363635}
   prefabOffsets: {x: 200, y: 200}
   firstSpot: {fileID: 874606927}
   columnsAndRows: {x: 2, y: 5}
   placeKey: 101
   cost: 0
+  toBePurchasedBirbs: []
 --- !u!1 &450844374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,6 +3394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   everythingVisual: {fileID: 312510588}
+  prefab: {fileID: 0}
   button: {fileID: 1462379641}
   birbName: {fileID: 1766910227}
   desc: {fileID: 1823231198}
@@ -6472,7 +6474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1431502603}
   m_Layer: 5
-  m_Name: PlacingTower
+  m_Name: BuyingStore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

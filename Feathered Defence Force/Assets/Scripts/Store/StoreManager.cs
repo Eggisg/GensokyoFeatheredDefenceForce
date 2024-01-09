@@ -20,7 +20,7 @@ public class StoreManager : MonoBehaviour
 	public GameObject basePanel;
 	public GameObject closedStore;
 	public GameObject openedStore;
-	public GameObject buyingBirb;
+	public GameObject buyingStore;
 	public GameObject purchaseButton;
 
 	GameObject newBirb;
@@ -31,7 +31,7 @@ public class StoreManager : MonoBehaviour
 	public KeyCode placeKey;
 	public int cost;
 
-	private List<GameObject> toBePurchasedBirbs;
+	[SerializeField] private List<GameObject> toBePurchasedBirbs;
 
 	private const string CONFIRM_PLACEMENT = "Press E to confirm placement."; // Dirty to have the texts hardcoded as non-const strings...
 	private const string CHANGE_PLACEMENT = "Press E to change placement.";
@@ -63,7 +63,7 @@ public class StoreManager : MonoBehaviour
 
 		//}
 
-		toBePurchasedBirbs = new(); // hehehehaw
+		toBePurchasedBirbs = new(); // hehehehaw // devious laugther
 	}
 
 	public void CreatePanels(List<GameObject> birbPrefabList)
@@ -104,12 +104,12 @@ public class StoreManager : MonoBehaviour
 			if ((Input.GetKeyDown(placeKey) || Input.GetMouseButtonDown(0)) && newBirb.GetComponent<GenericBirbTower>().canPlace)
 			{
 				purchaseButton.SetActive(true);
-				buyingBirb.SetActive(true);
+				buyingStore.SetActive(true);
 				//birbtowerScript.birbSprite.color = Color.white; // Don't confuse the player between an already placed borb, and to-be placed ones
 				placingtower = false;
 				placingtower2 = true;
 
-				toBePurchasedBirbs.Add(buyingBirb);
+				toBePurchasedBirbs.Add(newBirb);
 				Debug.Log(toBePurchasedBirbs.Count);
 			}
 		}
@@ -130,11 +130,11 @@ public class StoreManager : MonoBehaviour
 		{
 			placingText.SetActive(true);
 			placingText.GetComponent<TextMeshProUGUI>().text = CHANGE_PLACEMENT;
-			if (Input.GetKey(KeyCode.E)) // Why was this set to Q...
+			if (Input.GetKey(KeyCode.E)) // Why was this set to Q... //idk bro
 			{
 				openedStore.SetActive(false);
 				closedStore.SetActive(false);
-				buyingBirb.SetActive(false);
+				buyingStore.SetActive(false);
 				placingtower = true;
 				placingtower2 = false;
 				placingText.SetActive(true);
@@ -155,7 +155,7 @@ public class StoreManager : MonoBehaviour
 	{
 		closedStore.SetActive(true);
 		openedStore.SetActive(false);
-		//Debug.Log("Store is closed?!? How am I to buy my Touhou themed blowjob now..."); //you will never get it now // this is so fucked up...
+		//Debug.Log("Store is closed?!? How am I to buy my Touhou themed blowjob now..."); //you will never get it now // this is so fucked up... // literally 1984
 	}
 
 	public void StartPlacingTower(GameObject prefab, int cost)
@@ -163,7 +163,7 @@ public class StoreManager : MonoBehaviour
 		this.cost = cost;
 		openedStore.SetActive(false);
 		closedStore.SetActive(false);
-		buyingBirb.SetActive(false);
+		buyingStore.SetActive(false);
 
 
 		placingtower = true;
@@ -180,7 +180,7 @@ public class StoreManager : MonoBehaviour
 	{
 		openedStore.SetActive(false);
 		closedStore.SetActive(false);
-		buyingBirb.SetActive(false);
+		buyingStore.SetActive(false);
 
 
 		placingtower = true;
@@ -190,7 +190,7 @@ public class StoreManager : MonoBehaviour
 	}
 	public void ConfirmPlacement()
 	{
-		buyingBirb.SetActive(true);
+		buyingStore.SetActive(true);
 		placingtower = false;
 		placingtower2 = true;
 		//press E to change placement
@@ -203,7 +203,7 @@ public class StoreManager : MonoBehaviour
 		Destroy(newBirb);
 		placingtower2 = false;
 		doStore = false;
-		buyingBirb.SetActive(false);
+		buyingStore.SetActive(false);
 		placingText.SetActive(false);
 	}
 
@@ -236,7 +236,7 @@ public class StoreManager : MonoBehaviour
 
 		placingtower = false;
 		placingtower2 = false;
-		buyingBirb.SetActive(false);
+		buyingStore.SetActive(false);
 		placingText.SetActive(false);
 
 	}
