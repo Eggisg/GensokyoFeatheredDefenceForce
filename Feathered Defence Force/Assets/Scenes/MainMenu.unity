@@ -9334,7 +9334,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   musics:
-  - {fileID: 11400000, guid: 00700cc9817feaa4d861499bcd123661, type: 2}
+  - {fileID: 11400000, guid: 25ddec09b9fc387488f4fb14bf9aa167, type: 2}
   musicAttPrefab: {fileID: 2046853641}
   musicSourcePrefab: {fileID: 7066317528610692592, guid: 5738ebde6bbaed545b8e826ac1d684a6, type: 3}
   attObject: {fileID: 2046853642}
@@ -9343,6 +9343,8 @@ MonoBehaviour:
     timer: 0
     duration: 0
     enabled: 1
+    timeIsScaled: 0
+  menu: 0
 --- !u!1001 &2046853640
 PrefabInstance:
   m_ObjectHideFlags: 0

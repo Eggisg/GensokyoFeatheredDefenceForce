@@ -26,7 +26,12 @@ public class SettingsFuncs : MonoBehaviour
     public void ChangeGlobal() 
     {
         Manager.globalAudio = sliderGlobal.value;
-        Manager.UpdateMusicVolumes();
+        if (Manager.instance != null)
+        {
+            Manager.UpdateMusicVolumes();
+        }
+        AudioManager.UpdateMusicVolumes();
+        
     }
     public void ChangeMusic(float amount)
     {
@@ -34,8 +39,12 @@ public class SettingsFuncs : MonoBehaviour
     }
     public void ChangeMusic() 
     {
-        Manager.globalMusic = sliderMusic.value;
-        Manager.UpdateMusicVolumes();
+        Manager.globalAudio = sliderGlobal.value;
+        if (Manager.instance != null)
+        {
+            Manager.UpdateMusicVolumes();
+        }
+        AudioManager.UpdateMusicVolumes();
     }
     public void ChangeMisc(float amount)
     {

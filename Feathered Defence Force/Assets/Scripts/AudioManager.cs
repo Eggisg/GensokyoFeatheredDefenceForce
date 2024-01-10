@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager instance;
 
     [Header("Audio")]
     public static float globalAudio;
@@ -26,13 +26,15 @@ public class AudioManager : MonoBehaviour
     public MusicShowcaseObjects attObject;
     public float musicAttPhaseDelay;
     public TimerScript musicTimerScript = new TimerScript(0);
+    private int musicidskip;
     int musicTimerPhase;
     int musicIdSkip;
     bool musicPlaying;
+    private bool startup = true;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
     private void Start()
     {
@@ -41,6 +43,10 @@ public class AudioManager : MonoBehaviour
         globalMisc = Manager.globalMisc;
         InstantiateMusic();
         PlayMusic(0, 1);
+        if (startup)
+        {
+            UpdateMusicVolumes();
+        }
 
     }
 
@@ -73,10 +79,11 @@ public class AudioManager : MonoBehaviour
                 {
                     for (int i = 0; i < musics.Count; ++i)
                     {
-                        if (i != musicIdSkip)
+
+                        if (i != musicidskip)
                         {
-                            float startVolume = musicSources[i].volume;
-                            musicSources[i].volume = Mathf.Clamp(startVolume - musicTimerScript.Progress(), 0, 1) * globalAudio;
+                            float startvolume = musicSources[i].volume;
+                            musicSources[i].volume = Mathf.Clamp(startvolume - musicTimerScript.Progress(), 0, 1) * globalAudio;
                         }
                         else
                         {
@@ -88,7 +95,7 @@ public class AudioManager : MonoBehaviour
                         (
                             attObject.offScreenPoint.position,
                             attObject.onScreenPoint.position,
-                            Instance.linearCurve.Evaluate(musicTimerScript.Progress())
+                            linearCurve.Evaluate(musicTimerScript.Progress())
                         );
                 }
                 else if (musicTimerPhase == 3)
@@ -97,7 +104,7 @@ public class AudioManager : MonoBehaviour
                         (
                             attObject.onScreenPoint.position,
                             attObject.offScreenPoint.position,
-                            Instance.linearCurve.Evaluate(musicTimerScript.Progress())
+                            linearCurve.Evaluate(musicTimerScript.Progress())
                         );
                 }
 
@@ -116,28 +123,28 @@ public class AudioManager : MonoBehaviour
     {
         volume = Mathf.Clamp01(volume);
         volume *= globalAudio * globalMisc;
-        GameObject audioGameObject = Instantiate(Instance.audioSourcePrefab, Instance.transform.position, Quaternion.identity, Instance.transform);
+        GameObject audioGameObject = Instantiate(instance.audioSourcePrefab, instance.transform.position, Quaternion.identity, instance.transform);
         AudioSource audioSource = audioGameObject.GetComponent<AudioSource>();
 
-        audioSource.clip = Instance.audios[audioID];
-        Instance.audioTimers.Add(new TimerScript(Instance.audios[audioID].length));
+        audioSource.clip = instance.audios[audioID];
+        instance.audioTimers.Add(new TimerScript(instance.audios[audioID].length));
 
-        Instance.audioSources.Add(audioGameObject);
+        instance.audioSources.Add(audioGameObject);
         audioSource.volume = volume;
         audioSource.Play();
     }
 
     public static void PlayMusic(int musicID, float musicVolume = 1)
     {
-        if (Instance.musicIdSkip != musicID)
+        if (instance.musicIdSkip != musicID)
         {
-            Instance.musicPlaying = true;
+            instance.musicPlaying = true;
 
-            Instance.musicIdSkip = musicID;
+            instance.musicIdSkip = musicID;
 
-            Instance.attObject.TextAttributionObject.text = Instance.musics[musicID].musicName;
-            Instance.musicTimerScript.Start(Instance.musicAttPhaseDelay);
-            Instance.musicTimerPhase = 1;
+            instance.attObject.TextAttributionObject.text = instance.musics[musicID].musicName;
+            instance.musicTimerScript.Start(instance.musicAttPhaseDelay);
+            instance.musicTimerPhase = 1;
         }
     }
 
@@ -152,6 +159,18 @@ public class AudioManager : MonoBehaviour
             audioSource.volume = 0;
             musicSources.Add(audioSource);
         }
+    }
+
+    public static void UpdateMusicVolumes()
+    {
+        for (int i = 0; i < instance.musics.Count; i++)
+        {
+            if (i == instance.musicidskip)
+            {
+                instance.musicSources[i].volume = 1 * globalAudio * globalMusic;
+            }
+        }
+
     }
     #endregion
 }
