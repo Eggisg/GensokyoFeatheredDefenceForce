@@ -9,6 +9,7 @@ public class TimerScript
     [SerializeField] private float timer = 0;
     [SerializeField] private float duration;
     [SerializeField] public bool enabled = true;
+    [SerializeField] public bool timeIsScaled = false; 
 
     internal TimerScript(float duration)
     {
@@ -56,9 +57,21 @@ public class TimerScript
     {
         if (enabled)
         {
-            timer += Time.deltaTime;
+            if (!timeIsScaled)
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                float scaledtime = 0;
+                if (Time.timeScale != 0)
+                {
+                    scaledtime = Time.deltaTime / Time.timeScale;
+                }
+                timer += scaledtime;
+            }
+            
         }
-
     }
     public float Progress()
     {

@@ -23,39 +23,47 @@ public class SpeedHandlerScript : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale != 0) //evil divide by 0 remover
+        if (!Manager.instance.dead)
         {
-            elapsedTime += Time.deltaTime / Time.timeScale;
-        }
-        
-        if (Input.GetKeyDown(speedUp))
-        {
-            elapsedTime = 0;
-            AddSpeed();
-        }
-        if (Input.GetKey(speedUp)) 
-        {
-            
-            if (elapsedTime >= delay)
+            if (Time.timeScale != 0) //evil divide by 0 remover
             {
-                elapsedTime -= 0.08f;
+                elapsedTime += Time.deltaTime / Time.timeScale;
+            }
+
+            if (Input.GetKeyDown(speedUp))
+            {
+                elapsedTime = 0;
                 AddSpeed();
             }
-        }
-
-        if (Input.GetKeyDown(speedDown))
-        {
-            elapsedTime = 0;
-            RemoveSpeed();
-        }
-        if (Input.GetKey(speedDown))
-        {
-            if (elapsedTime >= delay)
+            if (Input.GetKey(speedUp))
             {
-                elapsedTime -= 0.08f;
+
+                if (elapsedTime >= delay)
+                {
+                    elapsedTime -= 0.08f;
+                    AddSpeed();
+                }
+            }
+
+            if (Input.GetKeyDown(speedDown))
+            {
+                elapsedTime = 0;
                 RemoveSpeed();
             }
+            if (Input.GetKey(speedDown))
+            {
+                if (elapsedTime >= delay)
+                {
+                    elapsedTime -= 0.08f;
+                    RemoveSpeed();
+                }
+            }
         }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
     }
     private void AddSpeed()
     {

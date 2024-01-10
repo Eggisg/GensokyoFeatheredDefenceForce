@@ -22,8 +22,8 @@ public class Manager : MonoBehaviour
 
     public List<GameObject> objectsToDisableOnDeath;
     public GameObject objectToEnableOnDeath;
-
     public GameObject pauseMenu;
+    public bool dead = false;
 
     #region misc
     public float bossSize, enemySize;
@@ -73,6 +73,7 @@ public class Manager : MonoBehaviour
     {
         //start all 3 of the musics
         instance.playerMoney = 0;
+        musicTimerScript.timeIsScaled = true;
         InstanstiateMusic();
         AddMonye(20);
         RemoveHealth(-100);
@@ -118,6 +119,7 @@ public class Manager : MonoBehaviour
                 {
                     for (int i = 0; i < musics.Count; ++i)
                     {
+                         
                         if (i != musicidskip)
                         {
                             float startvolume = musicSources[i].volume;
@@ -281,6 +283,7 @@ public class Manager : MonoBehaviour
 
     private void Death()
     {
+        dead = true;
         foreach (GameObject obj in objectsToDisableOnDeath)
         {
             obj.SetActive(false);
