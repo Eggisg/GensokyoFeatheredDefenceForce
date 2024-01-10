@@ -12,7 +12,7 @@ public class StoreManager : MonoBehaviour
     public bool placingtower2 = false;
     public GameObject placingText;
     public float panelscale;
-    
+
 
     public static StoreManager instance;
 
@@ -62,30 +62,36 @@ public class StoreManager : MonoBehaviour
         //}
     }
 
+
     public void CreatePanels(List<GameObject> birbPrefabList)
     {
-
         birbPrefabList.Sort(SortByCost);
-        
+
+        //part 1 of fixing resolution with shop
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
+
         for (int i = 0; i < birbPrefabList.Count; i++)
         {
             int row = i / columnsAndRows.x;
             int col = i % columnsAndRows.x;
 
-            Vector3 newPos = new Vector3(col * prefabOffsets.x, row * -prefabOffsets.y, 0f);
+            //part 2 of fixing resolution with shop, calculates position blah blah 
+            Vector3 newPos = new Vector3(col * prefabOffsets.x * screenWidth / 1920f, row * -prefabOffsets.y * screenHeight / 1080f, 0f);
             newPos += firstSpot.position;
+
             GameObject panelObject = Instantiate(basePanel, newPos, Quaternion.identity, openedStore.transform);
             panelObject.transform.localScale = new Vector3(panelscale, panelscale, panelscale);
             StorePanel panelScript = panelObject.GetComponent<StorePanel>();
             panelScript.birbPrefab = birbPrefabList[i];
-            
+
             panelScript.InstantiateInformation();
         }
     }
 
     public void Update()
     {
-        
+
         if (placingtower)
         {
             GenericBirbTower birbtowerScript = newBirb.GetComponent<GenericBirbTower>();
@@ -189,7 +195,7 @@ public class StoreManager : MonoBehaviour
         placingtower = false;
         placingtower2 = true;
         //press E to change placement
-        
+
     }
 
     public void CancelPurchase()

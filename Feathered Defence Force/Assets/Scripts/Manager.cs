@@ -86,15 +86,6 @@ public class Manager : MonoBehaviour
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Time.timeScale = 3;
-        }
-        else if (Input.GetKeyUp(KeyCode.G))
-        {
-            Time.timeScale = 1;
-        }
-
 
         #region Debug
         if (Input.GetKey(KeyCode.Q))
