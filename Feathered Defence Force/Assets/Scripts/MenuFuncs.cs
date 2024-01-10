@@ -37,6 +37,7 @@ public class MenuFuncs : MonoBehaviour
     }
     public void StartGame(int id)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(id);
     }
     public void CloseMenu()

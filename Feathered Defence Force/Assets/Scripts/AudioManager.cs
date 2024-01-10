@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     int musicTimerPhase;
     int musicIdSkip;
     bool musicPlaying;
-    private bool startup = true;
+    private static bool startup = true;
 
     private void Awake()
     {
@@ -45,6 +45,7 @@ public class AudioManager : MonoBehaviour
         PlayMusic(0, 1);
         if (startup)
         {
+            startup = false;
             UpdateMusicVolumes();
         }
 
