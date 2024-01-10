@@ -83,7 +83,7 @@ public class AudioManager : MonoBehaviour
                         if (i != musicidskip)
                         {
                             float startvolume = musicSources[i].volume;
-                            musicSources[i].volume = Mathf.Clamp(startvolume - musicTimerScript.Progress(), 0, 1) * globalAudio;
+                            musicSources[i].volume = Mathf.Clamp(startvolume - musicTimerScript.Progress(), 0, 1) * globalAudio * globalMusic;
                         }
                         else
                         {

@@ -274,7 +274,7 @@ public class Manager : MonoBehaviour
     public static void RemoveHealth(int health)
     {
         instance.health -= health;
-        if (instance.health < 0)
+        if (instance.health <= 0)
         {
             instance.Death();
         }
@@ -289,6 +289,7 @@ public class Manager : MonoBehaviour
             obj.SetActive(false);
         }
         objectToEnableOnDeath.SetActive(true);
+
     }
 
     public static void UpdateMusicVolumes()

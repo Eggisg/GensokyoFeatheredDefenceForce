@@ -1060,7 +1060,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1597238028}
         m_TargetAssemblyTypeName: MenuFuncs, Assembly-CSharp
-        m_MethodName: ToggleCredits
+        m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6028,7 +6028,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1597238028}
         m_TargetAssemblyTypeName: MenuFuncs, Assembly-CSharp
-        m_MethodName: ToggleCredits
+        m_MethodName: OpenCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7637,6 +7637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   credits: {fileID: 1515823651}
   menu: {fileID: 1550395682}
+  patchnotes: {fileID: 0}
+  menuList: []
 --- !u!114 &1597238029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12052,6 +12054,7 @@ MonoBehaviour:
   - {fileID: 1597238023}
   objectToEnableOnDeath: {fileID: 1641172438}
   pauseMenu: {fileID: 1597238023}
+  dead: 0
   bossSize: 1
   enemySize: 0.6
   audios:
@@ -12096,6 +12099,7 @@ MonoBehaviour:
     timer: 0
     duration: 0
     enabled: 1
+    timeIsScaled: 0
   chimataStockManipulation: 0
   particlePrefabs:
   - {fileID: 6107169019271298376, guid: 0430fa1ce1d3f4e45a898d63045bbb86, type: 3}
