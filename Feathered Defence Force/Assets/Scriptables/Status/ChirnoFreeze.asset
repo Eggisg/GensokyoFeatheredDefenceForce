@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f58536ff14d11443a9682a82aa158c6, type: 3}
   m_Name: ChirnoFreeze
   m_EditorClassIdentifier: 
-  duration: 0
+  duration: 5
   enemy: {fileID: 0}

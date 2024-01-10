@@ -25,5 +25,5 @@ MonoBehaviour:
   cost: 10
   specialFloat: 0
   image: {fileID: 21300000, guid: 4cd0802a00836f54eacd5ad54cd1391c, type: 3}
-  status: {fileID: 0}
+  status: {fileID: 11400000, guid: 4087cc2e8b310e64aa0457a694370928, type: 2}
   throwablePrefab: {fileID: 6948505935315649172, guid: 851e653a373dd6446906f76f6e29bf9a, type: 3}
