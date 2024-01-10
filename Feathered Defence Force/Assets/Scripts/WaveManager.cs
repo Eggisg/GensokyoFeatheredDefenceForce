@@ -32,7 +32,8 @@ public class WaveManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;        
+        instance = this;
+        speedboost = 1;
     }
     private void Start()
     {
