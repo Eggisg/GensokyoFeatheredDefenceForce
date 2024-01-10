@@ -6,11 +6,16 @@ using UnityEngine.UIElements;
 public class SettingsFuncs : MonoBehaviour
 {
     public UnityEngine.UI.Slider sliderGlobal, sliderMusic, sliderMisc;
+    [SerializeField] private bool debug;
     private void Start()
     {
-        ChangeGlobal(1);
-        ChangeMusic(1);
-        ChangeMisc(1);
+        if (debug)
+        {
+            ChangeGlobal(1);
+            ChangeMusic(1);
+            ChangeMisc(1);
+        }
+
     }
 
     public void ChangeGlobal(float amount)
@@ -21,6 +26,7 @@ public class SettingsFuncs : MonoBehaviour
     public void ChangeGlobal() 
     {
         Manager.globalAudio = sliderGlobal.value;
+        Manager.UpdateMusicVolumes();
     }
     public void ChangeMusic(float amount)
     {
@@ -29,6 +35,7 @@ public class SettingsFuncs : MonoBehaviour
     public void ChangeMusic() 
     {
         Manager.globalMusic = sliderMusic.value;
+        Manager.UpdateMusicVolumes();
     }
     public void ChangeMisc(float amount)
     {

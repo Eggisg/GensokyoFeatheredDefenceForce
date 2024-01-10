@@ -722,7 +722,7 @@ RectTransform:
   m_GameObject: {fileID: 75163585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.23, y: 2.23, z: 2.23}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1550395683}
@@ -753,13 +753,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Controls
+  m_text: 'Controls:
 
-    G - 3x Speed
+    N/M - Change Speed
 
     LMB/E - PlaceBirb
 
-    RMB on birb - info
+    RMB on birb
+    - info
 
 '
   m_isRightToLeft: 0
@@ -7621,6 +7622,7 @@ MonoBehaviour:
   sliderGlobal: {fileID: 1859122241}
   sliderMusic: {fileID: 482857779}
   sliderMisc: {fileID: 555158298}
+  debug: 0
 --- !u!1 &1600046053
 GameObject:
   m_ObjectHideFlags: 0

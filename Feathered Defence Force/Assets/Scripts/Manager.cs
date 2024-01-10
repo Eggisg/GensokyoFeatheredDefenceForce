@@ -288,6 +288,18 @@ public class Manager : MonoBehaviour
         objectToEnableOnDeath.SetActive(true);
     }
 
+    public static void UpdateMusicVolumes()
+    {
+        for (int i = 0; i < instance.musics.Count; i++)
+        {
+            if (i == instance.musicidskip)
+            {
+                instance.musicSources[i].volume = 1 * globalAudio * globalMusic;
+            }
+        }
+
+    }
+
     public void GoToMenu()
     {
         SceneManager.LoadScene(0);
