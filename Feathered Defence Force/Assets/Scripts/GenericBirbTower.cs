@@ -21,6 +21,8 @@ public class GenericBirbTower : CommonInheritor
     public List<Transform> targets;
     private TimerScript pTimerScript;
 
+    
+
 
     [Header("MovingBirb")]
     public bool movingBirb;
@@ -53,6 +55,7 @@ public class GenericBirbTower : CommonInheritor
             {
                 pTimerScript.Start(birbInfo.speed);
                 canShoot = true;
+                
             }
         }
         else if (movingBirb)
@@ -145,7 +148,6 @@ public class GenericBirbTower : CommonInheritor
 
     public void PlaceTower()
     {
-        Debug.Log("tf2 sexupdate");
         active = true;
         transform.position = new Vector3(transform.position.x, transform.position.y, 44);
         range.showCollider = false;
